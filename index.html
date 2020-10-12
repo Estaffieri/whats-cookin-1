@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../whats-cookin/styles.css">
+    <meta charset="UTF-8">
+    <title>Whats Cookin</title>
+  </head>
+
+  <body>
+    <nav>
+      <button type="button" name="Home">Home</button>
+      <button type="button" name="favorites">Favorites</button>
+      <div class="header-section">
+        <p>Welcome user</p>
+        <input type="text" class="search" name="search-field" value="What would you like to cook?">
+      </div>
+    </nav>
+    <main>
+      <h3 class="recipes-heading">Need ideas?</h3>
+      <section class="home-view">
+        <article class="category">
+        </article>
+      </section>
+      <section class="favorite-view">
+        <article class="favorite-recipe">
+        </article>
+      </section>
+      <section class="one-category-view">
+        <article class="category-recipe">
+        </article>
+      </section>
+      <section class="recipe-view">
+        <article class="recipe-image">
+          <img src="" alt="recipe">
+          <img src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
+        </article>
+        <section class="ingredient-section">
+          <h4>Ingredients</h4>
+          <article class="ingredient-list">
+          </article>
+        </section>
+        <section class="directions-section">
+          <h4>Directions</h4>
+          <article class="directions-list">
+          </article>
+        </section>
+      </section>
+    </main>
+    <script type="text/javascript" src="data/users.js"></script>
+    <script type="text/javascript" src="data/recipes.js"></script>
+    <script type="text/javascript" src="data/ingredients.js"></script>
+    <script type="text/javascript" src="src/scripts.js"></script>
+    <script type="text/javascript" src="src/Ingredient.js"></script>
+    <script type="text/javascript" src="src/Recipe.js"></script>
+    <script type="text/javascript" src="src/User.js"></script>
+  </body>
+</html>
