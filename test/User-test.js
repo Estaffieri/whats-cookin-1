@@ -25,4 +25,8 @@ describe("User", function() {
   it('should have a name', function() {
     expect(user.name).to.equal(testUsers.name);
   });  
+
+  it('should have a name', function() {
+    expect(user.pantry).to.equal(testUsers.pantry);
+  }); 
 });
