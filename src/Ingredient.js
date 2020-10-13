@@ -4,6 +4,6 @@ class Ingredient {
     this.name = name,
     this.estimatedCostInCents = cost
   }
-};
+}
 
 module.exports = Ingredient;
