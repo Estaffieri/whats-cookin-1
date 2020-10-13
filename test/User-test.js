@@ -17,5 +17,12 @@ describe("User", function() {
   it('should be a new instance of User', function() {
     expect(user).to.be.an.instanceOf(User);
   });
-  
+
+  it('should have an id', function() {
+    expect(user.id).to.equal(testUsers.id);
+  });
+
+  it('should have a name', function() {
+    expect(user.name).to.equal(testUsers.name);
+  });  
 });
