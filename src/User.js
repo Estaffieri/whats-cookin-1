@@ -8,33 +8,23 @@ class User {
   addFavoriteRecipe(recipe) {
     this.favoriteRecipes.push(recipe)
   }
+  removeFavoriteRecipe(unfavoritedRecipe) {
+    this.favoriteRecipes.forEach(recipe => {
+      if (recipe === unfavoritedRecipe) {
+        this.favoriteRecipes.splice(this.favoriteRecipes.indexOf(recipe), 1)
+      }
+    })
+  }
   findByTag(searchTerm) {
     let results = [];
-    console.log(this.favoriteRecipes);
-    
-    this.favoriteRecipes.forEach(recipe => {
-        console.log(this.favoriteRecipes);
-        console.log("A", recipe);
-        if (recipe.tags.includes(searchTerm)) {
-            console.log("B", results);
-            results.push(recipe)
-            console.log("C", results);
-        }
-        // results.push(recipe.tags.filter(tag => {
-        //     return tag === searchTerm
-        // }))
 
-    //   recipe.tags.filter(tag => {
-    //     if (tag === searchTerm) {
-    //       results.push(recipe)
-    //     }
-    //   })
-    //   return 
-    // })
-    // return results
+    this.favoriteRecipes.forEach(recipe => {
+      if (recipe.tags.includes(searchTerm)) {
+        results.push(recipe)
+      }
     })
     return results
-    }   
+  }   
 }
 
 

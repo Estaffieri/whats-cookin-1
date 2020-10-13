@@ -386,3 +386,5 @@ let userDummyData = [ {
       }
     ]
   }]
+
+  module.exports = userDummyData;

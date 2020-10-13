@@ -2,8 +2,8 @@ const chai = require("chai");
 const expect = chai.expect;
 
 const User = require("../src/User");
-const testUsers = require("./dummy-data.js/testUsers");
-const testRecipes = require("./dummy-data.js/testRecipes");
+const testUsers = require("./dummy-data/testUsers");
+const testRecipes = require("./dummy-data/testRecipes");
 
 describe("User", function() {
   let id, name, pantry, favoriteRecipes;
@@ -41,9 +41,17 @@ describe("User", function() {
     expect(user.favoriteRecipes.length).to.equal(1);   
   }); 
 
+  it('should be able to remove a recipe from favoriteRecipes', function() {
+    user.addFavoriteRecipe(testRecipes[0]);
+    user.addFavoriteRecipe(testRecipes[1])
+    user.removeFavoriteRecipe(testRecipes[0])
+
+    expect(user.favoriteRecipes.length).to.equal(1);   
+  }); 
+
+
   it('should be able to search for a specific tag within favoriteRecipes', function() {
     user.addFavoriteRecipe(testRecipes[0]);
-console.log("test", user.favoriteRecipes);
     expect(user.findByTag("snack")).to.deep.equal([{
       "id": 595736,
       "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",

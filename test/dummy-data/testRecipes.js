@@ -221,3 +221,4 @@ const testRecipes = [
         ]
       }
 ]
+module.exports = testRecipes;
