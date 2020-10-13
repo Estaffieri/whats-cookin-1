@@ -26,7 +26,11 @@ describe("User", function() {
     expect(user.name).to.equal(testUsers.name);
   });  
 
-  it('should have a name', function() {
+  it('should have a pantry', function() {
     expect(user.pantry).to.equal(testUsers.pantry);
+  }); 
+
+  it('should have a place to store favorite recipes', function() {
+    expect(user.favoriteRecipes).to.deep.equal([]);   
   }); 
 });
