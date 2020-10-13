@@ -24,7 +24,10 @@ class User {
       }
     })
     return results
-  }   
+  }  
+  checkPantry(recipe) {
+      recipe.ingredients
+  } 
 }
 
 

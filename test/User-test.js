@@ -171,4 +171,8 @@ describe("User", function() {
       ]
     }]);   
   }); 
+  it('should be able to tell if we have enough ingredients to make a recipe', function() {
+  
+    expect(user.).to.equal();   
+  }); 
 });
