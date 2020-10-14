@@ -25,17 +25,14 @@ describe("User", function() {
 
   it('should have an id', function() {
     expect(user.id).to.equal(1);
-    console.log("id", user.id);
   });
 
   it('should have a name', function() {
     expect(user.name).to.equal("Saige O'Kon");
-    console.log('name', user.name);
   });
 
   it('should have a pantry', function() {
     expect(user.pantry).to.equal(pantry);
-    console.log(user.pantry);
     expect(user.pantry.pantryList[0].ingredient).to.equal(11477);
     expect(user.pantry.pantryList[2].amount).to.equal(10);
   });
@@ -65,6 +62,7 @@ describe("User", function() {
 
   it('should be able to search for a specific tag within favoriteRecipes', function() {
     user.addFavoriteRecipe(testRecipes[0]);
+    user.addFavoriteRecipe(testRecipes[1]);
     expect(user.findByTag("snack")).to.deep.equal([{
       "id": 595736,
       "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
@@ -185,7 +183,25 @@ describe("User", function() {
     }]);
   });
   it('should be able to tell if we have enough ingredients to make a recipe', function() {
-
-    expect(user).to.equal();
+    user.addFavoriteRecipe(testRecipes[0]);
+    user.addFavoriteRecipe({
+      "id": 1,
+      "image": "picture",
+      "ingredients": [{
+        "id": 20081,
+        "quantity": {
+          "amount": 1.5,
+          "unit": "c"
+        }
+      }],
+      "instructions": [{"instruction":"Cook", "number": 1}],
+      "name": "test",
+      "tags": ["lunch"]
+    });
+    expect(user.checkPantry(user.favoriteRecipes[0])).to.equal(false);
+    user.checkPantry(user.favoriteRecipes[1]);
+    expect(user.shoppingList).to.deep.equal([])
+    expect(user.checkPantry(user.favoriteRecipes[1])).to.equal(true);
+    console.log("TEST", user.shoppingList);
   });
 });

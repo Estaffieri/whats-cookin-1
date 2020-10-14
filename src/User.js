@@ -2,10 +2,11 @@ const Pantry = require("./Pantry");
 
 class User {
   constructor(id, name, pantry) {
-    this.id = id;
-    this.name = name;
-    this.pantry = pantry;
-    this.favoriteRecipes = [];
+    this.id = id,
+    this.name = name,
+    this.pantry = pantry,
+    this.favoriteRecipes = [],
+    this.shoppingList = []
   }
   addFavoriteRecipe(recipe) {
     this.favoriteRecipes.push(recipe)
@@ -28,7 +29,18 @@ class User {
     return results
   }
   checkPantry(recipe) {
-      recipe.ingredients
+    this.shoppingList = [];
+    let pantryNumbers = [];
+    this.pantry.pantryList.forEach(item => {
+      pantryNumbers.push(item.ingredient);
+    });
+    recipe.ingredients.forEach (ingredient => {
+      if (!pantryNumbers.includes(ingredient.id)) {
+        this.shoppingList.push(ingredient);
+      }
+    });
+    console.log('Shopping List', this.shoppingList);
+    return (!this.shoppingList.length) ? true : false;
   }
 }
 
