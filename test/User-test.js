@@ -2,13 +2,17 @@ const chai = require("chai");
 const expect = chai.expect;
 
 const User = require("../src/User");
-const testUsers = require("./dummy-data/testUsers");
+const Pantry = require("../src/Pantry")
+const userDummyData = require("./dummy-data/testUsers");
+// const testUser = userDummyData;
 const testRecipes = require("./dummy-data/testRecipes");
 
 describe("User", function() {
-  let id, name, pantry, favoriteRecipes;
+  let id, name, pantry, favoriteRecipes, ingredientList;
   beforeEach(function() {
-    user = new User(testUsers.id, testUsers.name, testUsers.pantry)
+    pantry = new Pantry(userDummyData[0].pantry);
+    user = new User(userDummyData[0].id, userDummyData[0].name, pantry)
+
   });
 
   it('should be a function', function() {
@@ -20,34 +24,43 @@ describe("User", function() {
   });
 
   it('should have an id', function() {
-    expect(user.id).to.equal(testUsers.id);
+    expect(user.id).to.equal(1);
+    console.log("id", user.id);
   });
 
   it('should have a name', function() {
-    expect(user.name).to.equal(testUsers.name);
-  });  
+    expect(user.name).to.equal("Saige O'Kon");
+    console.log('name', user.name);
+  });
 
   it('should have a pantry', function() {
-    expect(user.pantry).to.equal(testUsers.pantry);
-  }); 
+    expect(user.pantry).to.equal(pantry);
+    console.log(user.pantry);
+    expect(user.pantry.pantryList[0].ingredient).to.equal(11477);
+    expect(user.pantry.pantryList[2].amount).to.equal(10);
+  });
 
   it('should have a place to store favorite recipes', function() {
-    expect(user.favoriteRecipes).to.deep.equal([]);   
-  }); 
+    expect(user.favoriteRecipes).to.deep.equal([]);
+  });
 
   it('should be able to add a recipe to favoriteRecipes', function() {
     user.addFavoriteRecipe(testRecipes[0]);
 
-    expect(user.favoriteRecipes.length).to.equal(1);   
-  }); 
+    expect(user.favoriteRecipes.length).to.equal(1);
+    expect(user.favoriteRecipes[0].id).to.equal(595736);
+  });
 
   it('should be able to remove a recipe from favoriteRecipes', function() {
     user.addFavoriteRecipe(testRecipes[0]);
     user.addFavoriteRecipe(testRecipes[1])
     user.removeFavoriteRecipe(testRecipes[0])
 
-    expect(user.favoriteRecipes.length).to.equal(1);   
-  }); 
+    expect(user.favoriteRecipes.length).to.equal(1);
+    expect(user.favoriteRecipes[0].id).to.equal(678353);
+    expect(user.favoriteRecipes[0].name).to.equal("Maple Dijon Apple Cider Grilled Pork Chops");
+
+  });
 
 
   it('should be able to search for a specific tag within favoriteRecipes', function() {
@@ -169,10 +182,10 @@ describe("User", function() {
         "antipasto",
         "hor d'oeuvre"
       ]
-    }]);   
-  }); 
+    }]);
+  });
   it('should be able to tell if we have enough ingredients to make a recipe', function() {
-  
-    expect(user.).to.equal();   
-  }); 
+
+    expect(user).to.equal();
+  });
 });

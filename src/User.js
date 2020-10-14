@@ -1,3 +1,5 @@
+const Pantry = require("./Pantry");
+
 class User {
   constructor(id, name, pantry) {
     this.id = id;
@@ -24,10 +26,10 @@ class User {
       }
     })
     return results
-  }  
+  }
   checkPantry(recipe) {
       recipe.ingredients
-  } 
+  }
 }
 
 
