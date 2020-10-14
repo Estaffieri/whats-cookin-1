@@ -39,8 +39,10 @@ class User {
         this.shoppingList.push(ingredient);
       }
     });
-    console.log('Shopping List', this.shoppingList);
     return (!this.shoppingList.length) ? true : false;
+  }
+  returnShoppingList() {
+      return this.shoppingList
   }
 }
 

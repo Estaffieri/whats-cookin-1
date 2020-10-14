@@ -202,6 +202,14 @@ describe("User", function() {
     user.checkPantry(user.favoriteRecipes[1]);
     expect(user.shoppingList).to.deep.equal([])
     expect(user.checkPantry(user.favoriteRecipes[1])).to.equal(true);
-    console.log("TEST", user.shoppingList);
+  });
+
+  it("should return the shopping list to the user", function() {
+
+    expect(user.returnShoppingList()).to.deep.equal([])
+
+    user.addFavoriteRecipe(testRecipes[0]);
+    user.checkPantry(user.favoriteRecipes[0]);
+    expect(user.returnShoppingList().length).to.equal(3);
   });
 });
