@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../whats-cookin/styles.css">
     <meta charset="UTF-8">
     <title>Whats Cookin</title>
   </head>
-
   <body>
     <nav>
-      <button type="button" name="Home">Home</button>
-      <button type="button" name="favorites">Favorites</button>
-      <div class="header-section">
+      <button class="home-view-button" type="button" name="Home"><img id="logo" src="./assets/icons/003-cooking-pots.svg"/>
+        <h1>What's Cookin'</h1>
+      </button>
+      <button class="Favorites-view" type="button" name="Favorites">Favorites</button>
+      <div class="search-section">
         <p>Welcome user</p>
         <input type="text" class="search" name="search-field" value="What would you like to cook?">
-        <button type="button" name="search"><img src="./assets/icons/002-magnifying-glass.svg"/></button>
+        <button type="button" name="search"><img id="magnifying-glass" src="./assets/icons/002-magnifying-glass.svg"/></button>
       </div>
     </nav>
     <main>

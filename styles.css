@@ -2,7 +2,52 @@
   border: 1px solid black;
 }
 
+nav {
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none;
+}
+
 .search {
   opacity: 0.7;
   width: 50%;
+}
+
+.home-view-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  font-size: 2em;
+  font-weight: 300;
+}
+
+#logo {
+  padding: 1em;
+  font-size: 1em;
+}
+
+.favorite-view {
+
+}
+
+.one-category-view {
+
+}
+
+.recipe-view {
+
 }

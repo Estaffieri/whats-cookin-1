@@ -38,4 +38,6 @@ class Recipe {
   }
 }
 
-module.exports = Recipe;
+if (typeof module !== 'undefined') {
+  module.exports = Recipe;
+}
