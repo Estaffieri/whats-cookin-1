@@ -8,10 +8,10 @@
 
   <body>
     <nav>
-      <button type="button" name="Home">Home</button>
-      <button type="button" name="favorites">Favorites</button>
+      <button type="button" name="Home" id="home">Home</button>
+      <button type="button" name="favorites" id="favorites">Favorites</button>
       <div class="header-section">
-        <p>Welcome user</p>
+        <p class="welcome-user">Welcome user</p>
         <input type="text" class="search" name="search-field" value="What would you like to cook?">
       </div>
     </nav>
@@ -25,13 +25,13 @@
         <article class="favorite-recipe">
         </article>
       </section>
-      <section class="one-category-view">
+      <section class="single-category-view">
         <article class="category-recipe">
         </article>
       </section>
       <section class="recipe-view">
         <button type="button" id="pantry-button">Check Pantry for Ingredients</button>
-        <button type="button" name="shopping-list-button">Get Shopping List</button>
+        <button type="button" id="shopping-list-button">Get Shopping List</button>
         <article class="recipe-image">
           <img src="" alt="recipe">
           <img src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
@@ -51,9 +51,10 @@
     <script type="text/javascript" src="data/users.js"></script>
     <script type="text/javascript" src="data/recipes.js"></script>
     <script type="text/javascript" src="data/ingredients.js"></script>
-    <script type="text/javascript" src="src/scripts.js"></script>
     <script type="text/javascript" src="src/Ingredient.js"></script>
+    <script type="text/javascript" src="src/Pantry.js"></script>
     <script type="text/javascript" src="src/Recipe.js"></script>
     <script type="text/javascript" src="src/User.js"></script>
+    <script type="text/javascript" src="src/scripts.js"></script>
   </body>
 </html>
