@@ -1,10 +1,25 @@
 * {
   border: 1px solid black;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+html {
+  margin: 0 auto;
+  height: 100vh;
+  width: 100vw;
+}
+
+body {
+  margin: 0;
+  padding: 26px;
+  min-width: 1024px;
+  min-height:726px;
 }
 
 nav {
-  font-family: 'Open Sans', sans-serif;
   display: flex;
+
 }
 
 main {
@@ -12,9 +27,17 @@ main {
   flex-direction: column;
 }
 
-.search-section {
+logo-container {
   display: flex;
   flex-direction: column;
+  align-content: space-around;
+  align-items: center;
+  justify-items: center;
+}
+
+.search-section {
+  display: inline-flex;
+  margin: 1em;
 }
 
 .hidden {
@@ -27,27 +50,27 @@ main {
 }
 
 .home-view-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-items: center;
+  margin: 1em;
+
+}
+
+h1 {
   font-size: 2em;
-  font-weight: 300;
+  margin-top: 0em;
+}
+
+.favorites-view-button {
+  font-size: 2em;
+  margin: 0.5em;
 }
 
 #logo {
-  padding: 1em;
-  font-size: 1em;
+  margin-top: 1em;
+  width: 3.5em;
 }
 
-.favorite-view {
-
-}
-
-.one-category-view {
-
-}
-
-.recipe-view {
+#magnifying-glass {
+  margin-top: 1em;
+  width: 3.5em;
 
 }

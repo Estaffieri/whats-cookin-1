@@ -8,15 +8,22 @@
   </head>
   <body>
     <nav>
-      <button class="home-view-button" type="button" name="Home"><img id="logo" src="./assets/icons/003-cooking-pots.svg"/>
-        <h1>What's Cookin'</h1>
+      <div class="button-wrapper">
+      <button class="home-view-button" type="button" name="Home">
+        <div class="logo-container">
+          <img id="logo" src="./assets/icons/003-cooking-pots.svg"/>
+          <h1>What's Cookin'</h1>
+        </div>
       </button>
-      <button class="Favorites-view" type="button" name="Favorites">Favorites</button>
-      <div class="search-section">
-        <p>Welcome user</p>
-        <input type="text" class="search" name="search-field" value="What would you like to cook?">
-        <button type="button" name="search"><img id="magnifying-glass" src="./assets/icons/002-magnifying-glass.svg"/></button>
-      </div>
+    </div>
+      <button class="favorites-view-button" type="button" name="Favorites">Favorites</button>
+      <div class="search-wrapper">
+        <section class="greeting"><p>Welcome user</p></section>
+        <section class="search-section">
+          <input type="text" class="search" name="search-field" value="What would you like to cook?">
+          <button type="button" name="search"><img id="magnifying-glass" src="./assets/icons/002-magnifying-glass.svg"/></button>
+        </section>
+    </div>
     </nav>
     <main>
       <h3 class="recipes-heading">Need ideas?</h3>
