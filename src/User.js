@@ -9,7 +9,9 @@ class User {
     this.shoppingList = []
   }
   addFavoriteRecipe(recipe) {
-    this.favoriteRecipes.push(recipe)
+    if (!this.favoriteRecipes.includes(recipe)) {
+      this.favoriteRecipes.push(recipe);
+    };
   }
   removeFavoriteRecipe(unfavoritedRecipe) {
     this.favoriteRecipes.forEach(recipe => {
@@ -39,7 +41,6 @@ class User {
         this.shoppingList.push(ingredient);
       }
     });
-    console.log('Shopping List', this.shoppingList);
     return (!this.shoppingList.length) ? true : false;
   }
 }
