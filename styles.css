@@ -19,6 +19,7 @@ body {
 
 nav {
   display: flex;
+  background: #A8DADC;
 
 }
 
@@ -27,50 +28,80 @@ main {
   flex-direction: column;
 }
 
-logo-container {
-  display: flex;
-  flex-direction: column;
-  align-content: space-around;
-  align-items: center;
-  justify-items: center;
+button {
+  border: transparent;
 }
 
-.search-section {
-  display: inline-flex;
-  margin: 1em;
+h1, h2 {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+h3 {
+  color: #ffffff;
+  font-family:'Playfair display';
 }
 
 .hidden {
   display: none;
 }
 
-.search {
-  opacity: 0.7;
-  width: 50%;
-}
-
 .home-view-button {
   margin: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  background: #A8DADC;
 
-}
-
-h1 {
-  font-size: 2em;
-  margin-top: 0em;
 }
 
 .favorites-view-button {
-  font-size: 2em;
-  margin: 0.5em;
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #A8DADC;
+
+}
+
+.search-wrapper {
+  align-content: center;
+  width: 73%;
+}
+
+.greeting {
+  margin: 1em;
+}
+
+.search-section {
+  display: flex;
+  margin: 1em;
+  width: 96%;
+}
+
+.search-input {
+  opacity: 0.7;
+  width: 95%;
+}
+
+.search-button {
+    padding: 0;
+    width: 3em;
+    height: 3em; 
+    background: #E63946;
 }
 
 #logo {
-  margin-top: 1em;
-  width: 3.5em;
+  width: 4em;
 }
 
 #magnifying-glass {
-  margin-top: 1em;
-  width: 3.5em;
+  margin-top: 0.27em;
+  width: 2em;
+}
 
+#whisk {
+  width: 4em;
 }
