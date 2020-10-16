@@ -1,5 +1,3 @@
-const Pantry = require("./Pantry");
-
 class User {
   constructor(id, name, pantry) {
     this.id = id,

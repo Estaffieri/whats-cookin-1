@@ -1,6 +1,3 @@
-const ingredientsDataFile = require('../data/ingredients');
-ingredientsData = ingredientsDataFile.ingredientsData;
-
 class Recipe {
   constructor(id, image, ingredients, instructions, name, tags) {
     this.id = id,

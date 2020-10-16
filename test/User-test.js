@@ -4,7 +4,6 @@ const expect = chai.expect;
 const User = require("../src/User");
 const Pantry = require("../src/Pantry")
 const userDummyData = require("./dummy-data/testUsers");
-// const testUser = userDummyData;
 const testRecipes = require("./dummy-data/testRecipes");
 
 describe("User", function() {
