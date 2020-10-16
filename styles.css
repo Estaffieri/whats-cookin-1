@@ -37,9 +37,13 @@ h1, h2 {
   margin-bottom: 0em;
 }
 
-h3 {
+.recipes-heading {
   color: #ffffff;
-  font-family:'Playfair display';
+  background: #457B9D;
+  margin-bottom: 0em;
+  padding: 0.75em;
+  border-top-right-radius: 15em;
+  width: 45%;
 }
 
 .hidden {
@@ -88,9 +92,24 @@ h3 {
 
 .search-button {
     padding: 0;
-    width: 3em;
-    height: 3em; 
+    width: 4em;
+    height: 4em; 
     background: #E63946;
+    border-bottom-right-radius: 0.15em;
+    border-top-right-radius: 0.15em;
+}
+
+.recipe-image {
+  width: 10rem;
+  height: 15rem;
+}
+.default {
+  width: 10rem;
+  height: 15rem;
+}
+
+.home-view {
+  
 }
 
 #logo {
@@ -105,3 +124,4 @@ h3 {
 #whisk {
   width: 4em;
 }
+
