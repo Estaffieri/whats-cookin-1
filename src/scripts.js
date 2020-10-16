@@ -22,12 +22,26 @@ let pantry;
 
 window.addEventListener('load', loadApp);
 homeView.addEventListener('click', function() {
-  displayByInput(event.target.innerText.toLowerCase());
+  goToRecipeResults(event.target.innerText.toLowerCase());
 });
 searchButton.addEventListener('click', function() {
-  displayByInput(searchBar.value);
+  goToRecipeResults(searchBar.value);
 });
+homeButton.addEventListener('click', goToHome);
+favoritesButton.addEventListener('click', goToFavorites);
 
+function goToHome() {
+  singleCategoryView.classList.add('hidden');
+  homeView.classList.remove('hidden');
+  sectionHeading.innerText = `Need Ideas?`;
+}
+
+function goToFavorites() {
+  singleCategoryView.classList.add('hidden');
+  homeView.classList.add('hidden');
+  favoriteView.classList.remove('hidden');
+  sectionHeading.innerText = `My favorite recipes`;
+}
 
 function getTags() {
   let tags = [];
@@ -120,7 +134,7 @@ function getRecipes(input) {
   return recipes;
 }
 
-function displayByInput(input) {
+function goToRecipeResults(input) {
   let recipes = getRecipes(input);
   if (recipes) {
     singleCategoryView.innerHTML = '';
