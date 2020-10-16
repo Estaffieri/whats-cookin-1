@@ -1,5 +1,3 @@
-const Pantry = require("./Pantry");
-
 class User {
   constructor(id, name, pantry) {
     this.id = id,
@@ -9,7 +7,9 @@ class User {
     this.shoppingList = []
   }
   addFavoriteRecipe(recipe) {
-    this.favoriteRecipes.push(recipe)
+    if (!this.favoriteRecipes.includes(recipe)) {
+      this.favoriteRecipes.push(recipe);
+    };
   }
   removeFavoriteRecipe(unfavoritedRecipe) {
     this.favoriteRecipes.forEach(recipe => {

@@ -1,5 +1,3 @@
-const ingredientsData = require('../data/ingredients')
-
 class Recipe {
   constructor(id, image, ingredients, instructions, name, tags) {
     this.id = id,

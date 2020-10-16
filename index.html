@@ -7,7 +7,7 @@
     <title>Whats Cookin</title>
   </head>
   <body>
-    <nav>
+    <nav> 
       <div class="button-wrapper">
         <button class="home-view-button" type="button" name="Home">
           <img id="logo" src="./assets/icons/003-cooking-pots.svg"/>
@@ -35,15 +35,15 @@
         <article class="category">
         </article>
       </section>
-      <section class="favorite-view">
+      <section class="favorite-view hidden">
         <article class="favorite-recipe">
         </article>
       </section>
-      <section class="one-category-view">
+      <section class="single-category-view hidden">
         <article class="category-recipe">
         </article>
       </section>
-      <section class="recipe-view">
+      <section class="recipe-view hidden">
         <article class="recipe-image">
           <img class= "default" src="assets/priscilla-du-preez-W8F9kM7F-5U-unsplash.jpg" alt="glorious default pie">
           <img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
@@ -58,14 +58,20 @@
           <article class="directions-list">
           </article>
         </section>
+        <section class="needed-items-section">
+          <h4>Items you still need:</h4>
+          <article class="needed-items-list">
+          </article>
+        </section>
       </section>
     </main>
     <script type="text/javascript" src="data/users.js"></script>
     <script type="text/javascript" src="data/recipes.js"></script>
     <script type="text/javascript" src="data/ingredients.js"></script>
-    <script type="text/javascript" src="src/scripts.js"></script>
     <script type="text/javascript" src="src/Ingredient.js"></script>
+    <script type="text/javascript" src="src/Pantry.js"></script>
     <script type="text/javascript" src="src/Recipe.js"></script>
     <script type="text/javascript" src="src/User.js"></script>
+    <script type="text/javascript" src="src/scripts.js"></script>
   </body>
 </html>

@@ -4,7 +4,6 @@ const expect = chai.expect;
 const User = require("../src/User");
 const Pantry = require("../src/Pantry")
 const userDummyData = require("./dummy-data/testUsers");
-// const testUser = userDummyData;
 const testRecipes = require("./dummy-data/testRecipes");
 
 describe("User", function() {
@@ -205,9 +204,7 @@ describe("User", function() {
   });
 
   it("should return the shopping list to the user", function() {
-
     expect(user.returnShoppingList()).to.deep.equal([])
-
     user.addFavoriteRecipe(testRecipes[0]);
     user.checkPantry(user.favoriteRecipes[0]);
     expect(user.returnShoppingList().length).to.equal(3);
