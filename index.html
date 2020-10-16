@@ -1,24 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../whats-cookin/styles.css">
     <meta charset="UTF-8">
     <title>Whats Cookin</title>
   </head>
-
   <body>
-    <nav>
-      <button type="button" name="Home" id="home">Home</button>
-      <button type="button" name="favorites" id="favorites">Favorites</button>
-      <div class="header-section">
-        <p class="welcome-user">Welcome user</p>
-        <input type="text" class="search" name="search-field" placeholder="Search by category or ingredient">
-        <button type="button" name="search" id="search"><img src="./assets/icons/002-magnifying-glass.svg" alt=""></button>
-      </div>
+    <nav> 
+      <div class="button-wrapper">
+        <button class="home-view-button" type="button" name="Home">
+          <img id="logo" src="./assets/icons/003-cooking-pots.svg"/>
+          <h1>What's Cookin'</h1>
+        </button>
+     </div>
+      <button class="favorites-view-button" type="button" name="Favorites">
+        <img id="whisk" src="./assets/icons/004-whisk.svg"/>
+        <h2>My Favorites</h2>
+      </button>
+      <div class="search-wrapper">
+        <section class="greeting"><h2>Welcome user!</h2></section>
+        <section class="search-section">
+          <input class="search-input" type="text" name="search-field" value="What would you like to cook?">
+          <button class="search-button" type="button" name="search">
+            <img id="magnifying-glass" src="./assets/icons/002-magnifying-glass.svg"/>
+          </button>
+        </section>
+     </div>
     </nav>
     <main>
       <h3 class="recipes-heading">Need ideas?</h3>
       <section class="home-view">
+        
         <article class="category">
         </article>
       </section>
@@ -32,8 +45,8 @@
       </section>
       <section class="recipe-view hidden">
         <article class="recipe-image">
-          <img src="" alt="recipe">
-          <img src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
+          <img class= "default" src="assets/priscilla-du-preez-W8F9kM7F-5U-unsplash.jpg" alt="glorious default pie">
+          <img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
         </article>
         <section class="ingredient-section">
           <h4>Ingredients</h4>
