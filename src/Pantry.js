@@ -1,3 +1,5 @@
+
+
 class Pantry {
   constructor(list) {
     this.pantryList = list
@@ -6,4 +8,6 @@ class Pantry {
 
 
 
-module.exports = Pantry;
+if (typeof module !== 'undefined') {
+  module.exports = Pantry;
+}

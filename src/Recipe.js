@@ -1,5 +1,3 @@
-const ingredientsData = require('../data/ingredients')
-
 class Recipe {
   constructor(id, image, ingredients, instructions, name, tags) {
     this.id = id,
@@ -38,4 +36,6 @@ class Recipe {
   }
 }
 
-module.exports = Recipe;
+if (typeof module !== 'undefined') {
+  module.exports = Recipe;
+}
