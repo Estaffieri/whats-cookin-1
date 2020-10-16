@@ -1,5 +1,6 @@
 const homeButton = document.querySelector("#home");
 const favoritesButton = document.querySelector("#favorites");
+const searchButton = document.querySelector("#search");
 const welcome = document.querySelector(".welcome-user");
 const searchBar = document.querySelector(".search");
 
@@ -21,8 +22,12 @@ let pantry;
 
 window.addEventListener('load', loadApp);
 homeView.addEventListener('click', function() {
-  displayByCategory(event.target.innerText.toLowerCase());
+  displayByInput(event.target.innerText.toLowerCase());
 });
+searchButton.addEventListener('click', function() {
+  displayByInput(searchBar.value);
+});
+
 
 function getTags() {
   let tags = [];
@@ -41,10 +46,10 @@ function getTags() {
 
 function generateCategories() {
   let categories = getTags();
-  display(categories);
+  displayCat(categories);
 }
 
-function display(items) {
+function displayCat(items) {
   homeView.innerHTML = '';
   items.forEach(item => {
     homeView.innerHTML += `<article class="category">${item}
@@ -82,19 +87,51 @@ function getRecipesByCategory(category) {
   recipeData.forEach(recipe => {
     if (recipe.tags.includes(category)) {
       matches.push(recipe);
-    };
+    }
   });
-  console.log(matches);
   return matches;
 }
 
-function displayByCategory(category) {
-  let recipes = getRecipesByCategory(category);
-  singleCategoryView.innerHTML = '';
-  recipes.forEach(recipe => {
-    singleCategoryView.innerHTML += `<article class="category-recipe">      <img src="${recipe.image}" alt="photo of ${recipe.name}"><h4 class="recipe-name">${recipe.name}<h4></article>`;
+function getRecipesByIngredient(input) {
+  let matches = [];
+  let ingredientId = '';
+  ingredientsData.forEach(ingredient => {
+    if (ingredient.name === input || ingredient.name === input.toLowerCase()) {
+      ingredientId = ingredient.id;
+    }
   });
+  recipeData.forEach(recipe => {
+    recipe.ingredients.forEach(ingredient => {
+      if (ingredient.id === ingredientId) {
+        matches.push(recipe);
+      }
+    });
+  });
+  return matches;
+}
+
+function getRecipes(input) {
+  let recipes = '';
+  if (getRecipesByCategory(input).length) {
+    recipes = getRecipesByCategory(input);
+  } else if (getRecipesByIngredient(input).length) {
+    recipes = getRecipesByIngredient(input);
+  };
+  return recipes;
+}
+
+function displayByInput(input) {
+  let recipes = getRecipes(input);
+  if (recipes) {
+    singleCategoryView.innerHTML = '';
+    recipes.forEach(recipe => {
+      singleCategoryView.innerHTML += `<article class="category-recipe"><img src="${recipe.image}" alt="photo of ${recipe.name}"><h4 class="recipe-name">${recipe.name}<h4></article>`;
+    });
+    sectionHeading.innerText = input.charAt(0).toUpperCase() + input.slice(1);
+  } else {
+    singleCategoryView.innerHTML = '';
+    sectionHeading.innerText = `Sorry!  We did not find ${input} in our recipes.  Please try again.`;
+  }
   singleCategoryView.classList.remove('hidden');
-  sectionHeading.innerText = category.charAt(0).toUpperCase() + category.slice(1);
   homeView.classList.add('hidden');
 }
