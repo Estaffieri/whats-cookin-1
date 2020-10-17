@@ -16,6 +16,17 @@ class Recipe {
     }, []);
     return steps;
   }
+  getIngredientList() {
+    let ingredientList = [];
+    this.ingredients.forEach(ingredient => {
+       ingredientsData.forEach(item => {
+        if(ingredient.id === item.id) {
+          ingredientList.push(`${item.name} (${ingredient.quantity.amount} ${ingredient.quantity.unit})`)
+        }
+      });
+    });
+    return ingredientList;
+  }
   getCostOfIngredients(list) {
     let cost = [];
     this.ingredients.forEach(ingredient => {
