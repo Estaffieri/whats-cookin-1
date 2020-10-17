@@ -66,8 +66,8 @@ function generateCategories() {
 function displayCat(items) {
   homeView.innerHTML = '';
   items.forEach(item => {
-    homeView.innerHTML += `<article class="category">${item}
-    </article>`;
+    homeView.innerHTML += `<div class="container"><article class="category"><img id="category-picture" src="assets/${item}556x370.jpg" alt="cover picture for ${item}"${item}
+    </article></div>`;
   });
 }
 
@@ -92,7 +92,7 @@ function loadApp() {
   let indexNum = getRandom(usersData.length);
   instantiatePantry(usersData, indexNum);
   instantiateUser(usersData, indexNum);
-  welcome.innerText = `Welcome ${getFirstName(user.name)}!`
+  welcome.innerHTML = `<h2>Welcome ${getFirstName(user.name)}!</h2>`
   generateCategories();
 }
 
