@@ -10,7 +10,8 @@ class Recipe {
   getInstructions() {
     let steps = this.instructions.reduce((setOfDirections, instruction) => {
       setOfDirections.push({
-        [instruction.number]: instruction.instruction
+        stepNumber: instruction.number,
+        step: instruction.instruction
       })
       return setOfDirections;
     }, []);
