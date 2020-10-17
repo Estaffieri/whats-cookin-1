@@ -109,6 +109,7 @@ h1, h2 {
 
 .category-recipe  {
   position: relative;
+  background-color: #ffffff;
   width: 100%;
 }
 
@@ -117,7 +118,7 @@ h1, h2 {
 }
 
 .single-category-view {
-  padding-top: 1em;
+  padding: 1em 1em 1em 1em;
   display: grid;
   grid-template-columns: 49% 49%;
   grid-gap: 2%;
