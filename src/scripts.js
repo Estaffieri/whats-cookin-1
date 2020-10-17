@@ -163,15 +163,31 @@ function goToRecipeResults(input) {
 function showSelectRecipe(targetName) {
   let recipe = getSingleRecipe(targetName);
   console.log(recipe);
+  console.log(recipe.getInstructions());
+  sectionHeading.innerText = `${recipe.name}`;
 
   recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
+
+  displayIngredients(recipe);
+  displayDirections(recipe);
+
+  recipeView.classList.remove('hidden');
+  singleCategoryView.classList.add('hidden');
+  favoriteView.classList.add('hidden');
+}
+
+function displayDirections(recipe) {
+  let list = recipe.getInstructions();
+  directionsList.innerHTML = '';
+  list.forEach(item => {
+    directionsList.innerHTML += `<p class="direction-item">Step ${item.stepNumber}: ${item.step}</><br>`
+  });
+}
+
+function displayIngredients(recipe) {
   let list = recipe.getIngredientList();
   ingredientList.innerHTML = '';
   list.forEach(item => {
     ingredientList.innerHTML += `<p class="ingredient-item">${item}</p><br>`
   });
-
-  recipeView.classList.remove('hidden');
-  singleCategoryView.classList.add('hidden');
-  favoriteView.classList.add('hidden');
 }
