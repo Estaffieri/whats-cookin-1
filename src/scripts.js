@@ -1,8 +1,8 @@
-const homeButton = document.querySelector("#home");
-const favoritesButton = document.querySelector("#favorites");
-const searchButton = document.querySelector("#search");
-const welcome = document.querySelector(".welcome-user");
-const searchBar = document.querySelector(".search");
+const homeButton = document.querySelector(".home-view-button");
+const favoritesButton = document.querySelector(".favorites-view-button");
+const searchButton = document.querySelector(".search-button");
+const welcome = document.querySelector(".greeting");
+const searchBar = document.querySelector(".search-input");
 
 const sectionHeading = document.querySelector(".recipes-heading");
 
@@ -29,6 +29,9 @@ searchButton.addEventListener('click', function() {
 });
 homeButton.addEventListener('click', goToHome);
 favoritesButton.addEventListener('click', goToFavorites);
+singleCategoryView.addEventListener('click', function() {
+  showSelectRecipe(event.target.closest('article').children[2].innerText);
+});
 
 function goToHome() {
   singleCategoryView.classList.add('hidden');
@@ -134,12 +137,19 @@ function getRecipes(input) {
   return recipes;
 }
 
+function getSingleRecipe(name) {
+  let rInfo = recipeData.find(recipe => recipe.name === name);
+  console.log(rInfo.ingredients);
+  let recipe = new Recipe(rInfo.id, rInfo.image, rInfo.ingredients, rInfo.instructions, rInfo.name, rInfo.tags);
+  return recipe
+}
+
 function goToRecipeResults(input) {
   let recipes = getRecipes(input);
   if (recipes) {
     singleCategoryView.innerHTML = '';
     recipes.forEach(recipe => {
-      singleCategoryView.innerHTML += `<article class="category-recipe"><img src="${recipe.image}" alt="photo of ${recipe.name}"><h4 class="recipe-name">${recipe.name}<h4></article>`;
+      singleCategoryView.innerHTML += `<article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon"><h4 class="recipe-name">${recipe.name}</h4></article>`;
     });
     sectionHeading.innerText = input.charAt(0).toUpperCase() + input.slice(1);
   } else {
@@ -148,4 +158,20 @@ function goToRecipeResults(input) {
   }
   singleCategoryView.classList.remove('hidden');
   homeView.classList.add('hidden');
+}
+
+function showSelectRecipe(targetName) {
+  let recipe = getSingleRecipe(targetName);
+  console.log(recipe);
+
+  recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
+  let list = recipe.getIngredientList();
+  ingredientList.innerHTML = '';
+  list.forEach(item => {
+    ingredientList.innerHTML += `<p class="ingredient-item">${item}</p><br>`
+  });
+
+  recipeView.classList.remove('hidden');
+  singleCategoryView.classList.add('hidden');
+  favoriteView.classList.add('hidden');
 }
