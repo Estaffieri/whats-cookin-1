@@ -145,21 +145,27 @@ function getSingleRecipe(name) {
   return recipe
 }
 
-function goToRecipeResults(input) {
-  let recipes = getRecipes(input);
-  if (recipes) {
+function displayResults(results, searchInput) {
+  if (results) {
     singleCategoryView.innerHTML = '';
-    recipes.forEach(recipe => {
+    results.forEach(recipe => {
       singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
       <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
     });
-    sectionHeading.innerText = input.charAt(0).toUpperCase() + input.slice(1);
+    sectionHeading.innerText = searchInput.charAt(0).toUpperCase() + searchInput.slice(1);
   } else {
     singleCategoryView.innerHTML = '';
-    sectionHeading.innerText = `Sorry!  We did not find ${input} in our recipes.  Please try again.`;
+    sectionHeading.innerText = `Sorry!  We did not find ${searchInput} in our recipes.  Please try again.`;
   }
+}
+
+function goToRecipeResults(input) {
+  let recipes = getRecipes(input);
+  displayResults(recipes, input);
   singleCategoryView.classList.remove('hidden');
   homeView.classList.add('hidden');
+  recipeView.classList.add('hidden');
+  favoriteView.classList.add('hidden');
 }
 
 function showSelectRecipe(targetName) {
@@ -172,13 +178,13 @@ function showSelectRecipe(targetName) {
   recipeView.classList.remove('hidden');
   singleCategoryView.classList.add('hidden');
   favoriteView.classList.add('hidden');
+  document.documentElement.scrollTop = 0;
 }
 
 function displayShoppingList(recipe) {
   user.checkPantry(recipe);
   let neededItems = recipe.getIngredientList(user.returnShoppingList());
   let price = recipe.getCostOfIngredients(user.returnShoppingList(), ingredientsData);
-  console.log(price);
   shoppingListPrice.innerText = `Approximate cost: $${price}`
   neededItemsList.innerHTML = '';
   neededItems.forEach(item => {
