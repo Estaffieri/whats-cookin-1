@@ -8,9 +8,6 @@ class User {
   }
   addFavoriteRecipe(recipe) {
     this.favoriteRecipes.push(recipe);
-    // if (!this.favoriteRecipes.includes(recipe)) {
-    //
-    // };
   }
   removeFavoriteRecipe(unfavoritedRecipe) {
     this.favoriteRecipes.forEach(recipe => {
