@@ -102,6 +102,6 @@ describe('Recipe', function() {
   });
 
   it('should add up the cost of all ingredients in the recipe', () => {
-    expect(recipe.getCostOfIngredients(allIngredients)).to.equal(6.75);
+    expect(recipe.getCostOfIngredients(recipe.ingredients, allIngredients)).to.equal(6.75);
   });
 });

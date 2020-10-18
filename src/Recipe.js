@@ -17,9 +17,9 @@ class Recipe {
     }, []);
     return steps;
   }
-  getIngredientList() {
+  getIngredientList(needs) {
     let ingredientList = [];
-    this.ingredients.forEach(ingredient => {
+    needs.forEach(ingredient => {
        ingredientsData.forEach(item => {
         if(ingredient.id === item.id) {
           ingredientList.push(`${item.name} (${ingredient.quantity.amount} ${ingredient.quantity.unit})`)
@@ -28,10 +28,10 @@ class Recipe {
     });
     return ingredientList;
   }
-  getCostOfIngredients(list) {
+  getCostOfIngredients(ingredients, data) {
     let cost = [];
-    this.ingredients.forEach(ingredient => {
-      list.forEach(item => {
+    ingredients.forEach(ingredient => {
+      data.forEach(item => {
         if (ingredient.id === item.id) {
           cost.push(item.estimatedCostInCents)
         }
@@ -44,7 +44,7 @@ class Recipe {
       return sum + price;
     }, 0);
     let totalPrice = totalCost * .01;
-    return totalPrice;
+    return totalPrice.toFixed(2);
   }
 }
 
