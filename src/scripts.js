@@ -40,13 +40,14 @@ function goToHome() {
   singleCategoryView.classList.add('hidden');
   recipeView.classList.add('hidden');
   sectionHeading.innerText = `Need Ideas?`;
+  document.documentElement.scrollTop = 0;
 }
 
 function goToFavorites() {
   singleCategoryView.classList.add('hidden');
   homeView.classList.add('hidden');
   favoriteView.classList.remove('hidden');
-  sectionHeading.innerText = `My favorite recipes`;
+  sectionHeading.innerText = `My favorite recipes`;  document.documentElement.scrollTop = 0;
 }
 
 function getTags() {
@@ -99,6 +100,7 @@ function loadApp() {
   instantiateUser(usersData, indexNum);
   welcome.innerHTML = `<h2>Welcome ${getFirstName(user.name)}!</h2>`
   generateCategories();
+  document.documentElement.scrollTop = 0;
 }
 
 function getRecipesByCategory(category) {
@@ -166,12 +168,13 @@ function goToRecipeResults(input) {
   homeView.classList.add('hidden');
   recipeView.classList.add('hidden');
   favoriteView.classList.add('hidden');
+  document.documentElement.scrollTop = 0;
 }
 
 function showSelectRecipe(targetName) {
   let recipe = getSingleRecipe(targetName);
   sectionHeading.innerText = `${recipe.name}`;
-  recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
+  recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
   displayIngredients(recipe);
   displayDirections(recipe);
   displayShoppingList(recipe);
