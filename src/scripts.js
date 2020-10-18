@@ -97,7 +97,7 @@ function loadApp() {
   let indexNum = getRandom(usersData.length);
   instantiatePantry(usersData, indexNum);
   instantiateUser(usersData, indexNum);
-  welcome.innerText = `Welcome ${getFirstName(user.name)}!`
+  welcome.innerHTML = `<h2>Welcome ${getFirstName(user.name)}!</h2>`
   generateCategories();
 }
 
@@ -150,7 +150,8 @@ function goToRecipeResults(input) {
   if (recipes) {
     singleCategoryView.innerHTML = '';
     recipes.forEach(recipe => {
-      singleCategoryView.innerHTML += `<article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon"><h4 class="recipe-name">${recipe.name}</h4></article>`;
+      singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
+      <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
     });
     sectionHeading.innerText = input.charAt(0).toUpperCase() + input.slice(1);
   } else {
