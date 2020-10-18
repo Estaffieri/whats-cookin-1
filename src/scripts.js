@@ -1,8 +1,8 @@
-const homeButton = document.querySelector("#home");
-const favoritesButton = document.querySelector("#favorites");
-const searchButton = document.querySelector("#search");
-const welcome = document.querySelector(".welcome-user");
-const searchBar = document.querySelector(".search");
+const homeButton = document.querySelector(".home-view-button");
+const favoritesButton = document.querySelector(".favorites-view-button");
+const searchButton = document.querySelector(".search-button");
+const welcome = document.querySelector(".greeting");
+const searchBar = document.querySelector(".search-input");
 
 const sectionHeading = document.querySelector(".recipes-heading");
 
@@ -92,7 +92,7 @@ function loadApp() {
   let indexNum = getRandom(usersData.length);
   instantiatePantry(usersData, indexNum);
   instantiateUser(usersData, indexNum);
-  welcome.innerText = `Welcome ${getFirstName(user.name)}!`
+  welcome.innerHTML = `<h2>Welcome ${getFirstName(user.name)}!</h2>`
   generateCategories();
 }
 
@@ -139,7 +139,8 @@ function goToRecipeResults(input) {
   if (recipes) {
     singleCategoryView.innerHTML = '';
     recipes.forEach(recipe => {
-      singleCategoryView.innerHTML += `<article class="category-recipe"><img src="${recipe.image}" alt="photo of ${recipe.name}"><h4 class="recipe-name">${recipe.name}<h4></article>`;
+      singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
+      <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
     });
     sectionHeading.innerText = input.charAt(0).toUpperCase() + input.slice(1);
   } else {
