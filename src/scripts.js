@@ -32,8 +32,51 @@ searchButton.addEventListener('click', function() {
 homeButton.addEventListener('click', goToHome);
 favoritesButton.addEventListener('click', goToFavorites);
 singleCategoryView.addEventListener('click', function() {
-  showSelectRecipe(event.target.closest('article').children[2].innerText);
+  handleRecipeClick(event)
 });
+
+function handleRecipeClick(event) {
+  if (event.target.classList.contains('bookmark')) {
+    updateFavorites(event.target.closest('article').children[2].innerText);
+  } else {
+    showSelectRecipe(event.target.closest('article').children[2].innerText);
+  }
+}
+
+function updateFavorites(recipeName) {
+  let recipe = recipeData.find(recipe => {
+    return recipe.name === recipeName
+  })
+  addOrRemoveFavorite(recipe);
+  // user.favoriteRecipes.forEach(recipe => {
+  //   if (recipe.name === recipeName) {
+  //     user.addFavoriteRecipe(recipe)
+  //   }
+  // })
+  // if ()
+  console.log("Favs", user.favoriteRecipes);
+}
+
+function addOrRemoveFavorite(recipe) {
+  if (!user.favoriteRecipes.includes(recipe)) {
+    user.addFavoriteRecipe(recipe);
+  } else {
+    user.removeFavoriteRecipe(recipe);
+  }
+}
+
+function showSelectRecipe(targetName) {
+  let recipe = getSingleRecipe(targetName);
+  sectionHeading.innerText = `${recipe.name}`;
+  recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
+  displayIngredients(recipe);
+  displayDirections(recipe);
+  displayShoppingList(recipe);
+  recipeView.classList.remove('hidden');
+  singleCategoryView.classList.add('hidden');
+  favoriteView.classList.add('hidden');
+  document.documentElement.scrollTop = 0;
+}
 
 function goToHome() {
   homeView.classList.remove('hidden');
@@ -151,7 +194,7 @@ function displayResults(results, searchInput) {
   if (results) {
     singleCategoryView.innerHTML = '';
     results.forEach(recipe => {
-      singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
+      singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
       <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
     });
     sectionHeading.innerText = searchInput.charAt(0).toUpperCase() + searchInput.slice(1);
@@ -167,19 +210,6 @@ function goToRecipeResults(input) {
   singleCategoryView.classList.remove('hidden');
   homeView.classList.add('hidden');
   recipeView.classList.add('hidden');
-  favoriteView.classList.add('hidden');
-  document.documentElement.scrollTop = 0;
-}
-
-function showSelectRecipe(targetName) {
-  let recipe = getSingleRecipe(targetName);
-  sectionHeading.innerText = `${recipe.name}`;
-  recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
-  displayIngredients(recipe);
-  displayDirections(recipe);
-  displayShoppingList(recipe);
-  recipeView.classList.remove('hidden');
-  singleCategoryView.classList.add('hidden');
   favoriteView.classList.add('hidden');
   document.documentElement.scrollTop = 0;
 }
