@@ -103,7 +103,7 @@ const recipeData = [
         "number": 5
       },
       {
-        "instruction": "Remove the pan from the oven and let sit for 10 minutes before removing onto a cooling rack.Top with ice cream and a drizzle of chocolate sauce.",
+        "instruction": "Remove the pan from the oven and let sit for 10 minutes before removing onto a cooling rack. Top with ice cream and a drizzle of chocolate sauce.",
         "number": 6
       }
     ],

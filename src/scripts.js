@@ -15,7 +15,9 @@ const checkPantryButton = document.querySelector("#pantry-button");
 const getShoppingList = document.querySelector("#shopping-list-button");
 const recipeImage = document.querySelector(".recipe-image");
 const ingredientList = document.querySelector(".ingredient-list");
-const directionsList = document.querySelector(".directions-list")
+const directionsList = document.querySelector(".directions-list");
+const shoppingListPrice = document.querySelector(".shopping-list-price");
+const neededItemsList = document.querySelector(".needed-items-list");
 
 let user;
 let pantry;
@@ -29,10 +31,14 @@ searchButton.addEventListener('click', function() {
 });
 homeButton.addEventListener('click', goToHome);
 favoritesButton.addEventListener('click', goToFavorites);
+singleCategoryView.addEventListener('click', function() {
+  showSelectRecipe(event.target.closest('article').children[2].innerText);
+});
 
 function goToHome() {
-  singleCategoryView.classList.add('hidden');
   homeView.classList.remove('hidden');
+  singleCategoryView.classList.add('hidden');
+  recipeView.classList.add('hidden');
   sectionHeading.innerText = `Need Ideas?`;
 }
 
@@ -53,8 +59,7 @@ function getTags() {
     });
   });
   return tags.map(tag => {
-    let word = tag.charAt(0).toUpperCase() + tag.slice(1);
-    return word;
+    return tag.charAt(0).toUpperCase() + tag.slice(1);
   });
 }
 
@@ -134,6 +139,12 @@ function getRecipes(input) {
   return recipes;
 }
 
+function getSingleRecipe(name) {
+  let rInfo = recipeData.find(recipe => recipe.name === name);
+  let recipe = new Recipe(rInfo.id, rInfo.image, rInfo.ingredients, rInfo.instructions, rInfo.name, rInfo.tags);
+  return recipe
+}
+
 function goToRecipeResults(input) {
   let recipes = getRecipes(input);
   if (recipes) {
@@ -149,4 +160,44 @@ function goToRecipeResults(input) {
   }
   singleCategoryView.classList.remove('hidden');
   homeView.classList.add('hidden');
+}
+
+function showSelectRecipe(targetName) {
+  let recipe = getSingleRecipe(targetName);
+  sectionHeading.innerText = `${recipe.name}`;
+  recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
+  displayIngredients(recipe);
+  displayDirections(recipe);
+  displayShoppingList(recipe);
+  recipeView.classList.remove('hidden');
+  singleCategoryView.classList.add('hidden');
+  favoriteView.classList.add('hidden');
+}
+
+function displayShoppingList(recipe) {
+  user.checkPantry(recipe);
+  let neededItems = recipe.getIngredientList(user.returnShoppingList());
+  let price = recipe.getCostOfIngredients(user.returnShoppingList(), ingredientsData);
+  console.log(price);
+  shoppingListPrice.innerText = `Approximate cost: $${price}`
+  neededItemsList.innerHTML = '';
+  neededItems.forEach(item => {
+    neededItemsList.innerHTML += `<p class="needed-item">${item}</p><br>`
+  });
+}
+
+function displayDirections(recipe) {
+  let list = recipe.getInstructions();
+  directionsList.innerHTML = '';
+  list.forEach(item => {
+    directionsList.innerHTML += `<p class="direction-item"><b>Step ${item.stepNumber}</b>: ${item.step}</><br>`
+  });
+}
+
+function displayIngredients(recipe) {
+  let list = recipe.getIngredientList(recipe.ingredients);
+  ingredientList.innerHTML = '';
+  list.forEach(item => {
+    ingredientList.innerHTML += `<p class="ingredient-item">${item}</p><br>`
+  });
 }
