@@ -37,24 +37,28 @@ singleCategoryView.addEventListener('click', function() {
 
 function handleRecipeClick(event) {
   if (event.target.classList.contains('bookmark')) {
-    updateFavorites(event.target.closest('article').children[2].innerText);
+    updateFavorites(event);
   } else {
     showSelectRecipe(event.target.closest('article').children[2].innerText);
   }
 }
 
-function updateFavorites(recipeName) {
+function updateFavorites(event) {
+  let recipeName = event.target.closest('article').children[2].innerText;
   let recipe = recipeData.find(recipe => {
     return recipe.name === recipeName
   })
   addOrRemoveFavorite(recipe);
-  // user.favoriteRecipes.forEach(recipe => {
-  //   if (recipe.name === recipeName) {
-  //     user.addFavoriteRecipe(recipe)
-  //   }
-  // })
-  // if ()
-  console.log("Favs", user.favoriteRecipes);
+  toggleBookmark(event);
+}
+
+function toggleBookmark(event) {
+  let icon = event.target.closest('article').children[1];
+  if (icon.classList.contains('unchecked')) {
+    icon.outerHTML = `<img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
+  } else {
+    icon.outerHTML = `<img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
+  }
 }
 
 function addOrRemoveFavorite(recipe) {
@@ -68,7 +72,7 @@ function addOrRemoveFavorite(recipe) {
 function showSelectRecipe(targetName) {
   let recipe = getSingleRecipe(targetName);
   sectionHeading.innerText = `${recipe.name}`;
-  recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
+  recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
   displayIngredients(recipe);
   displayDirections(recipe);
   displayShoppingList(recipe);
@@ -194,7 +198,7 @@ function displayResults(results, searchInput) {
   if (results) {
     singleCategoryView.innerHTML = '';
     results.forEach(recipe => {
-      singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
+      singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
       <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
     });
     sectionHeading.innerText = searchInput.charAt(0).toUpperCase() + searchInput.slice(1);
