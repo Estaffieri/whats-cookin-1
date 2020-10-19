@@ -32,7 +32,13 @@ searchButton.addEventListener('click', function() {
 homeButton.addEventListener('click', goToHome);
 favoritesButton.addEventListener('click', goToFavorites);
 singleCategoryView.addEventListener('click', function() {
-  handleRecipeClick(event)
+  handleRecipeClick(event);
+});
+favoriteView.addEventListener('click', function() {
+  handleClickInFavoriteView(event);
+});
+recipeView.addEventListener('click', function() {
+  handleClickInRecipeView(event);
 });
 
 function handleRecipeClick(event) {
@@ -40,6 +46,17 @@ function handleRecipeClick(event) {
     updateFavorites(event);
   } else {
     showSelectRecipe(event.target.closest('article').children[2].innerText);
+  }
+}
+
+function handleClickInFavoriteView(event) {
+  handleRecipeClick(event);
+  displayFavorites();
+}
+
+function handleClickInRecipeView(event) {
+  if (event.target.classList.contains('bookmark')) {
+    updateFavorites(event);
   }
 }
 
@@ -72,7 +89,7 @@ function addOrRemoveFavorite(recipe) {
 function showSelectRecipe(targetName) {
   let recipe = getSingleRecipe(targetName);
   sectionHeading.innerText = `${recipe.name}`;
-  recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
+  checkUserFavorites(recipe);
   displayIngredients(recipe);
   displayDirections(recipe);
   displayShoppingList(recipe);
@@ -82,16 +99,41 @@ function showSelectRecipe(targetName) {
   document.documentElement.scrollTop = 0;
 }
 
+function checkUserFavorites(recipe) {
+  
+  user.favoriteRecipes.forEach(favorite => {
+    if (favorite.id === recipe.id) {
+      console.log(recipe)
+      recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
+    } else {
+      recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
+    }
+  });
+}
+
 function goToHome() {
   homeView.classList.remove('hidden');
   singleCategoryView.classList.add('hidden');
   recipeView.classList.add('hidden');
+  favoriteView.classList.add('hidden');
   sectionHeading.innerText = `Need Ideas?`;
   document.documentElement.scrollTop = 0;
 }
 
+function displayFavorites() {
+  if (user.favoriteRecipes) {
+    favoriteView.innerHTML = '';
+    user.favoriteRecipes.forEach(recipe => {
+      favoriteView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">
+      <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
+    });
+  };
+}
+
 function goToFavorites() {
+  displayFavorites();
   singleCategoryView.classList.add('hidden');
+  recipeView.classList.add('hidden');
   homeView.classList.add('hidden');
   favoriteView.classList.remove('hidden');
   sectionHeading.innerText = `My favorite recipes`;  document.documentElement.scrollTop = 0;
@@ -164,7 +206,7 @@ function getRecipesByIngredient(input) {
   let matches = [];
   let ingredientId = '';
   ingredientsData.forEach(ingredient => {
-    if (ingredient.name === input || ingredient.name === input.toLowerCase()) {
+    if (ingredient.name === input.toLowerCase()) {
       ingredientId = ingredient.id;
     }
   });
