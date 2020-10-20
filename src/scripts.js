@@ -11,11 +11,11 @@ const favoriteView = document.querySelector(".favorite-view");
 const singleCategoryView = document.querySelector(".single-category-view");
 const recipeView = document.querySelector(".recipe-view");
 
-const checkPantryButton = document.querySelector("#pantry-button");
-const getShoppingList = document.querySelector("#shopping-list-button");
+const cookRecipeButton = document.querySelector(".make-recipe");
 const recipeImage = document.querySelector(".recipe-image");
 const ingredientList = document.querySelector(".ingredient-list");
 const directionsList = document.querySelector(".directions-list");
+const neededItemsSection = document.querySelector(".needed-items-section");
 const shoppingListPrice = document.querySelector(".shopping-list-price");
 const neededItemsList = document.querySelector(".needed-items-list");
 
@@ -40,6 +40,7 @@ favoriteView.addEventListener('click', function() {
 recipeView.addEventListener('click', function() {
   handleClickInRecipeView(event);
 });
+cookRecipeButton.addEventListener('click', showNeededItemsSection);
 
 function handleRecipeClick(event) {
   if (event.target.classList.contains('bookmark')) {
@@ -99,6 +100,7 @@ function showSelectRecipe(targetName) {
   displayDirections(recipe);
   displayShoppingList(recipe);
   changeView(recipeView, singleCategoryView, favoriteView, homeView);
+  neededItemsSection.classList.add('hidden');
   document.documentElement.scrollTop = 0;
 }
 
@@ -322,6 +324,10 @@ function goToRecipeResults(input) {
   document.documentElement.scrollTop = 0;
 }
 
+function showNeededItemsSection() {
+  neededItemsSection.classList.remove('hidden');
+}
+
 function displayShoppingList(recipe) {
   user.checkPantry(recipe);
   let neededItems = recipe.getIngredientList(user.returnShoppingList());
@@ -331,6 +337,7 @@ function displayShoppingList(recipe) {
   neededItems.forEach(item => {
     neededItemsList.innerHTML += `<p class="needed-item">${item}</p><br>`
   });
+  neededItemsSection.classList.remove('hidden');
 }
 
 function displayDirections(recipe) {
