@@ -121,6 +121,11 @@ function changeView(show, hide1, hide2, hide3) {
   hide1.classList.add('hidden');
   hide2.classList.add('hidden');
   hide3.classList.add('hidden');
+  if (!favoriteView.classList.contains('hidden')) {
+    searchBar.placeholder = 'Search MY FAVORITE recipes by type or ingredient';
+  } else {
+    searchBar.placeholder = 'Search all recipes by type or ingredient';
+  }
 }
 
 function goToHome() {
