@@ -127,6 +127,7 @@ h3 {
 
 .placeholder-image {
   position:relative;
+  opacity: 45%;
   width: 100%
 }
 
