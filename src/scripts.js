@@ -32,21 +32,117 @@ searchButton.addEventListener('click', function() {
 homeButton.addEventListener('click', goToHome);
 favoritesButton.addEventListener('click', goToFavorites);
 singleCategoryView.addEventListener('click', function() {
-  showSelectRecipe(event.target.closest('article').children[2].innerText);
+  handleRecipeClick(event);
+});
+favoriteView.addEventListener('click', function() {
+  handleClickInFavoriteView(event);
+});
+recipeView.addEventListener('click', function() {
+  handleClickInRecipeView(event);
 });
 
+function handleRecipeClick(event) {
+  if (event.target.classList.contains('bookmark')) {
+    updateFavorites(event);
+  } else {
+    showSelectRecipe(event.target.closest('article').children[2].innerText);
+  }
+}
+
+function handleClickInFavoriteView(event) {
+  handleRecipeClick(event);
+  displayFavorites();
+}
+
+function handleClickInRecipeView(event) {
+  if (event.target.classList.contains('bookmark')) {
+    let recipeName = event.target.closest('article').children[0].currentSrc;
+    let recipe = recipeData.find(recipe => {
+      return recipe.image === recipeName
+    })
+    addOrRemoveFavorite(recipe);
+    toggleBookmark(event);
+  }
+}
+
+function updateFavorites(event) {
+  let recipeName = event.target.closest('article').children[2].innerText;
+  let recipe = recipeData.find(recipe => {
+    return recipe.name === recipeName
+  })
+  addOrRemoveFavorite(recipe);
+  toggleBookmark(event);
+}
+
+function toggleBookmark(event) {
+  let icon = event.target.closest('article').children[1];
+  if (icon.classList.contains('unchecked')) {
+    icon.outerHTML = `<img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
+  } else {
+    icon.outerHTML = `<img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
+  }
+}
+
+function addOrRemoveFavorite(recipe) {
+  if (!user.favoriteRecipes.includes(recipe)) {
+    user.addFavoriteRecipe(recipe);
+  } else {
+    user.removeFavoriteRecipe(recipe);
+  }
+}
+
+function showSelectRecipe(targetName) {
+  let recipe = getSingleRecipe(targetName);
+  sectionHeading.innerText = `${recipe.name}`;
+  checkUserFavorites(recipe);
+  displayIngredients(recipe);
+  displayDirections(recipe);
+  displayShoppingList(recipe);
+  changeView(recipeView, singleCategoryView, favoriteView, homeView);
+  document.documentElement.scrollTop = 0;
+}
+
+function checkUserFavorites(recipe) {
+  if (user.favoriteRecipes.length) {
+    user.favoriteRecipes.forEach(favorite => {
+      if (favorite.id === recipe.id) {
+        recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
+      } else {
+        recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
+      }
+    });
+  }  else {
+    recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
+  }
+}
+
+function changeView(show, hide1, hide2, hide3) {
+  show.classList.remove('hidden');
+  hide1.classList.add('hidden');
+  hide2.classList.add('hidden');
+  hide3.classList.add('hidden');
+}
+
 function goToHome() {
-  homeView.classList.remove('hidden');
-  singleCategoryView.classList.add('hidden');
-  recipeView.classList.add('hidden');
+  changeView(homeView, singleCategoryView, recipeView, favoriteView);
   sectionHeading.innerText = `Need Ideas?`;
+  document.documentElement.scrollTop = 0;
+}
+
+function displayFavorites() {
+  if (user.favoriteRecipes) {
+    favoriteView.innerHTML = '';
+    user.favoriteRecipes.forEach(recipe => {
+      favoriteView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">
+      <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
+    });
+  };
 }
 
 function goToFavorites() {
-  singleCategoryView.classList.add('hidden');
-  homeView.classList.add('hidden');
-  favoriteView.classList.remove('hidden');
-  sectionHeading.innerText = `My favorite recipes`;
+  displayFavorites();
+  changeView(favoriteView, singleCategoryView, recipeView, homeView);
+  sectionHeading.innerText = `My favorite recipes`;  document.documentElement.scrollTop = 0;
 }
 
 function getTags() {
@@ -99,6 +195,7 @@ function loadApp() {
   instantiateUser(usersData, indexNum);
   welcome.innerHTML = `<h2>Welcome ${getFirstName(user.name)}!</h2>`
   generateCategories();
+  document.documentElement.scrollTop = 0;
 }
 
 function getRecipesByCategory(category) {
@@ -115,7 +212,7 @@ function getRecipesByIngredient(input) {
   let matches = [];
   let ingredientId = '';
   ingredientsData.forEach(ingredient => {
-    if (ingredient.name === input || ingredient.name === input.toLowerCase()) {
+    if (ingredient.name === input.toLowerCase()) {
       ingredientId = ingredient.id;
     }
   });
@@ -145,40 +242,36 @@ function getSingleRecipe(name) {
   return recipe
 }
 
-function goToRecipeResults(input) {
-  let recipes = getRecipes(input);
-  if (recipes) {
+function displayResults(results, searchInput) {
+  if (results) {
     singleCategoryView.innerHTML = '';
-    recipes.forEach(recipe => {
-      singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
-      <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
+    results.forEach(recipe => {
+      if (user.favoriteRecipes.includes(recipe)) {
+        singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">
+        <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
+      } else {
+        singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
+        <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
+      }
     });
-    sectionHeading.innerText = input.charAt(0).toUpperCase() + input.slice(1);
+    sectionHeading.innerText = searchInput.charAt(0).toUpperCase() + searchInput.slice(1);
   } else {
     singleCategoryView.innerHTML = '';
-    sectionHeading.innerText = `Sorry!  We did not find ${input} in our recipes.  Please try again.`;
+    sectionHeading.innerText = `Sorry!  We did not find ${searchInput} in our recipes.  Please try again.`;
   }
-  singleCategoryView.classList.remove('hidden');
-  homeView.classList.add('hidden');
 }
 
-function showSelectRecipe(targetName) {
-  let recipe = getSingleRecipe(targetName);
-  sectionHeading.innerText = `${recipe.name}`;
-  recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
-  displayIngredients(recipe);
-  displayDirections(recipe);
-  displayShoppingList(recipe);
-  recipeView.classList.remove('hidden');
-  singleCategoryView.classList.add('hidden');
-  favoriteView.classList.add('hidden');
+function goToRecipeResults(input) {
+  let recipes = getRecipes(input);
+  displayResults(recipes, input);
+  changeView(singleCategoryView, homeView, recipeView, favoriteView);
+  document.documentElement.scrollTop = 0;
 }
 
 function displayShoppingList(recipe) {
   user.checkPantry(recipe);
   let neededItems = recipe.getIngredientList(user.returnShoppingList());
   let price = recipe.getCostOfIngredients(user.returnShoppingList(), ingredientsData);
-  console.log(price);
   shoppingListPrice.innerText = `Approximate cost: $${price}`
   neededItemsList.innerHTML = '';
   neededItems.forEach(item => {
