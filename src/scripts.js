@@ -121,6 +121,7 @@ function changeView(show, hide1, hide2, hide3) {
   hide1.classList.add('hidden');
   hide2.classList.add('hidden');
   hide3.classList.add('hidden');
+  searchBar.value = '';
   if (!favoriteView.classList.contains('hidden')) {
     searchBar.placeholder = 'Search MY FAVORITE recipes by type or ingredient';
   } else {
@@ -203,14 +204,32 @@ function loadApp() {
   document.documentElement.scrollTop = 0;
 }
 
-function getRecipesByCategory(category) {
+function searchCategory(category) {
   let matches = [];
   recipeData.forEach(recipe => {
-    if (recipe.tags.includes(category)) {
+    if (recipe.tags.includes(category.toLowerCase())) {
       matches.push(recipe);
     }
   });
   return matches;
+}
+
+function searchFavoritesForCategory(category) {
+  let matches = [];
+  user.favoriteRecipes.forEach(recipe => {
+    if (recipe.tags.includes(category.toLowerCase())) {
+      matches.push(recipe);
+    }
+  });
+  return matches;
+}
+
+function getRecipesByCategory(category) {
+  if (!favoriteView.classList.contains('hidden')) {
+    return searchFavoritesForCategory(category);
+  } else {
+    return searchCategory(category);
+  }
 }
 
 function getRecipesByIngredient(input) {
