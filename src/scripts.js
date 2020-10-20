@@ -98,9 +98,7 @@ function showSelectRecipe(targetName) {
   displayIngredients(recipe);
   displayDirections(recipe);
   displayShoppingList(recipe);
-  recipeView.classList.remove('hidden');
-  singleCategoryView.classList.add('hidden');
-  favoriteView.classList.add('hidden');
+  changeView(recipeView, singleCategoryView, favoriteView, homeView);
   document.documentElement.scrollTop = 0;
 }
 
@@ -108,8 +106,9 @@ function checkUserFavorites(recipe) {
   if (user.favoriteRecipes.length) {
     user.favoriteRecipes.forEach(favorite => {
       if (favorite.id === recipe.id) {
-        console.log(recipe)
         recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
+      } else {
+        recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
       }
     });
   }  else {
@@ -117,11 +116,15 @@ function checkUserFavorites(recipe) {
   }
 }
 
+function changeView(show, hide1, hide2, hide3) {
+  show.classList.remove('hidden');
+  hide1.classList.add('hidden');
+  hide2.classList.add('hidden');
+  hide3.classList.add('hidden');
+}
+
 function goToHome() {
-  homeView.classList.remove('hidden');
-  singleCategoryView.classList.add('hidden');
-  recipeView.classList.add('hidden');
-  favoriteView.classList.add('hidden');
+  changeView(homeView, singleCategoryView, recipeView, favoriteView);
   sectionHeading.innerText = `Need Ideas?`;
   document.documentElement.scrollTop = 0;
 }
@@ -138,10 +141,7 @@ function displayFavorites() {
 
 function goToFavorites() {
   displayFavorites();
-  singleCategoryView.classList.add('hidden');
-  recipeView.classList.add('hidden');
-  homeView.classList.add('hidden');
-  favoriteView.classList.remove('hidden');
+  changeView(favoriteView, singleCategoryView, recipeView, homeView);
   sectionHeading.innerText = `My favorite recipes`;  document.documentElement.scrollTop = 0;
 }
 
@@ -246,8 +246,13 @@ function displayResults(results, searchInput) {
   if (results) {
     singleCategoryView.innerHTML = '';
     results.forEach(recipe => {
-      singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
-      <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
+      if (user.favoriteRecipes.includes(recipe)) {
+        singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">
+        <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
+      } else {
+        singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
+        <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
+      }
     });
     sectionHeading.innerText = searchInput.charAt(0).toUpperCase() + searchInput.slice(1);
   } else {
@@ -259,10 +264,7 @@ function displayResults(results, searchInput) {
 function goToRecipeResults(input) {
   let recipes = getRecipes(input);
   displayResults(recipes, input);
-  singleCategoryView.classList.remove('hidden');
-  homeView.classList.add('hidden');
-  recipeView.classList.add('hidden');
-  favoriteView.classList.add('hidden');
+  changeView(singleCategoryView, homeView, recipeView, favoriteView);
   document.documentElement.scrollTop = 0;
 }
 
