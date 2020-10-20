@@ -167,8 +167,8 @@ function generateCategories() {
 function displayCat(items) {
   homeView.innerHTML = '';
   items.forEach(item => {
-    homeView.innerHTML += `<article class="category">${item}
-    </article>`;
+    homeView.innerHTML += `<div class="container"><article class="category"><img id="glove" src="assets/icons/gloves.svg"/><img class="placeholder-image" src="assets/spices-556x370.jpg" alt="placeholder image"/><h3>${item}</h3>
+    </article></div>`;
   });
 }
 
