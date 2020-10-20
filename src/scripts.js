@@ -40,7 +40,9 @@ favoriteView.addEventListener('click', function() {
 recipeView.addEventListener('click', function() {
   handleClickInRecipeView(event);
 });
-cookRecipeButton.addEventListener('click', showNeededItemsSection);
+cookRecipeButton.addEventListener('click', function() {
+  showNeededItemsSection(event);
+});
 
 function handleRecipeClick(event) {
   if (event.target.classList.contains('bookmark')) {
@@ -324,8 +326,12 @@ function goToRecipeResults(input) {
   document.documentElement.scrollTop = 0;
 }
 
-function showNeededItemsSection() {
+function showNeededItemsSection(event) {
   neededItemsSection.classList.remove('hidden');
+  let recipeName = event.target.closest('main').children[0].innerHTML;
+  let recipeToCook = recipeData.find(recipe => recipe.name = recipeName);
+  user.addRecipeToCook(recipeToCook);
+  console.log(user.recipesToCook);
 }
 
 function displayShoppingList(recipe) {
