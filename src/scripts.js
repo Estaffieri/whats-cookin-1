@@ -232,14 +232,8 @@ function getRecipesByCategory(category) {
   }
 }
 
-function getRecipesByIngredient(input) {
+function searchIngredients(ingredientId) {
   let matches = [];
-  let ingredientId = '';
-  ingredientsData.forEach(ingredient => {
-    if (ingredient.name === input.toLowerCase()) {
-      ingredientId = ingredient.id;
-    }
-  });
   recipeData.forEach(recipe => {
     recipe.ingredients.forEach(ingredient => {
       if (ingredient.id === ingredientId) {
@@ -247,6 +241,18 @@ function getRecipesByIngredient(input) {
       }
     });
   });
+  return matches;
+}
+
+function getRecipesByIngredient(input) {
+  let ingredientId = '';
+  ingredientsData.forEach(ingredient => {
+    if (ingredient.name === input.toLowerCase()) {
+      ingredientId = ingredient.id;
+    }
+  });
+  let matches = searchIngredients(ingredientId)
+  console.log(matches);
   return matches;
 }
 
