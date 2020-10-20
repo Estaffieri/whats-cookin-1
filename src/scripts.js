@@ -56,7 +56,12 @@ function handleClickInFavoriteView(event) {
 
 function handleClickInRecipeView(event) {
   if (event.target.classList.contains('bookmark')) {
-    updateFavorites(event);
+    let recipeName = event.target.closest('article').children[0].currentSrc;
+    let recipe = recipeData.find(recipe => {
+      return recipe.image === recipeName
+    })
+    addOrRemoveFavorite(recipe);
+    toggleBookmark(event);
   }
 }
 
@@ -100,15 +105,16 @@ function showSelectRecipe(targetName) {
 }
 
 function checkUserFavorites(recipe) {
-  
-  user.favoriteRecipes.forEach(favorite => {
-    if (favorite.id === recipe.id) {
-      console.log(recipe)
-      recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
-    } else {
-      recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
-    }
-  });
+  if (user.favoriteRecipes.length) {
+    user.favoriteRecipes.forEach(favorite => {
+      if (favorite.id === recipe.id) {
+        console.log(recipe)
+        recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
+      }
+    });
+  }  else {
+    recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
+  }
 }
 
 function goToHome() {
