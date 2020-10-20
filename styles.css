@@ -4,6 +4,10 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+html {
+  min-width: min-content;
+}
+
 body {
   margin: 0;
   padding: 10px;
@@ -11,10 +15,17 @@ body {
   min-height:726px;
 }
 
+footer {
+  background-color: #1D3557;
+  margin: 0;
+  padding: 10px;
+  min-width: 1024px;
+  min-height: 10em;
+}
+
 nav {
   display: flex;
   background: #A8DADC;
-
 }
 
 main {
@@ -33,9 +44,9 @@ h1, h2 {
 
 h3 {
   color: #E63946;
-  font-size: 800;
   font-style: bold italic;
 }
+
 
 .recipe-name {
   padding-left: 1em;
@@ -49,7 +60,6 @@ h3 {
   align-items: center;
   justify-items: center;
   background: #A8DADC;
-
 }
 
 .favorites-view-button {
@@ -59,7 +69,15 @@ h3 {
   justify-content: center;
   align-items: center;
   background: #A8DADC;
+}
 
+.recipe-view-button {
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #A8DADC;
 }
 
 .search-wrapper {
@@ -83,12 +101,12 @@ h3 {
 }
 
 .search-button {
-    padding: 0;
-    width: 4em;
-    height: 4em; 
-    background: #E63946;
-    border-bottom-right-radius: 0.15em;
-    border-top-right-radius: 0.15em;
+  padding: 0;
+  width: 4em;
+  height: 4em; 
+  background: #E63946;
+  border-bottom-right-radius: 0.15em;
+  border-top-right-radius: 0.15em;
 }
 
 .recipes-heading {
@@ -145,6 +163,7 @@ h3 {
   grid-template-columns: 49% 49%;
   grid-gap: 2%;
   background-color: #457B9D;
+  overflow: hidden;
 }
 
 .container {
