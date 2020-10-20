@@ -33,15 +33,13 @@ h1, h2 {
 
 h3 {
   color: #E63946;
+  font-size: 800;
+  font-style: bold italic;
 }
 
 .recipe-name {
   padding-left: 1em;
   margin-bottom: 0em;
-}
-
-.hidden {
-  display: none;
 }
 
 .home-view-button {
@@ -113,7 +111,8 @@ h3 {
 }
 
 .category {
-  background-color: #fff;
+  text-align: center;
+  background-color: #ffffff;
 }
   
 .category-recipe  {
@@ -126,7 +125,20 @@ h3 {
   width: 100%;
 }
 
+.placeholder-image {
+  position:relative;
+  width: 100%
+}
+
 .single-category-view {
+  padding: 1em 1em 1em 1em;
+  display: grid;
+  grid-template-columns: 49% 49%;
+  grid-gap: 2%;
+  background-color: #457B9D;
+}
+
+.home-view {
   padding: 1em 1em 1em 1em;
   display: grid;
   grid-template-columns: 49% 49%;
@@ -163,9 +175,18 @@ h3 {
   position: absolute;
   right: 1em;
   width: 10%;
-
 }
 
+#glove {
+  position: absolute;
+  opacity: 100%;
+  width: 21%;
+  z-index: 1;
+  transform: translate(67%, 31%);
+}
 
+.hidden {
+  display: none;
+}
 
 
