@@ -4,6 +4,7 @@ class User {
     this.name = name,
     this.pantry = pantry,
     this.favoriteRecipes = [],
+    this.recipesToCook = [],
     this.shoppingList = []
   }
   addFavoriteRecipe(recipe) {
@@ -18,13 +19,15 @@ class User {
   }
   findByTag(searchTerm) {
     let results = [];
-
     this.favoriteRecipes.forEach(recipe => {
       if (recipe.tags.includes(searchTerm)) {
         results.push(recipe)
       }
     })
     return results
+  }
+  addRecipeToCook(recipe) {
+    this.recipesToCook.push(recipe);
   }
   checkPantry(recipe) {
     this.shoppingList = [];
