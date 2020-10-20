@@ -232,9 +232,21 @@ function getRecipesByCategory(category) {
   }
 }
 
-function searchIngredients(ingredientId) {
+function searchIngredient(ingredientId) {
   let matches = [];
   recipeData.forEach(recipe => {
+    recipe.ingredients.forEach(ingredient => {
+      if (ingredient.id === ingredientId) {
+        matches.push(recipe);
+      }
+    });
+  });
+  return matches;
+}
+
+function searchFavoritesForIngredient(ingredientId){
+  let matches = [];
+  user.favoriteRecipes.forEach(recipe => {
     recipe.ingredients.forEach(ingredient => {
       if (ingredient.id === ingredientId) {
         matches.push(recipe);
@@ -251,9 +263,13 @@ function getRecipesByIngredient(input) {
       ingredientId = ingredient.id;
     }
   });
-  let matches = searchIngredients(ingredientId)
-  console.log(matches);
-  return matches;
+  if (!favoriteView.classList.contains('hidden')) {
+      let matches = searchFavoritesForIngredient(ingredientId);
+      return matches;
+    } else {
+      let matches = searchIngredient(ingredientId);
+      return matches;
+    }
 }
 
 function getRecipes(input) {
@@ -286,8 +302,16 @@ function displayResults(results, searchInput) {
     });
     sectionHeading.innerText = searchInput.charAt(0).toUpperCase() + searchInput.slice(1);
   } else {
-    singleCategoryView.innerHTML = '';
-    sectionHeading.innerText = `Sorry!  We did not find ${searchInput} in our recipes.  Please try again.`;
+    saySorry(searchInput);
+  }
+}
+
+function saySorry(searchInput) {
+  singleCategoryView.innerHTML = '';
+  if (!favoriteView.classList.contains('hidden')) {
+    sectionHeading.innerText = `Sorry!  We did not find ${searchInput} in your favorite recipes.  Please try again.`;
+  } else {
+  sectionHeading.innerText = `Sorry!  We did not find ${searchInput} in our recipes.  Please try again.`;
   }
 }
 
