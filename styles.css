@@ -238,6 +238,24 @@ border: 5px solid #1D3557;
   font-style: oblique;
   font-weight: bold;
 }
+
+.make-recipe {
+  padding: 1em;
+    position: absolute;
+    transform: translate(38em, 1em);
+    z-index: 1;
+    font-weight: bold;
+    height: 3em;
+    background: #E63946;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+}
+
+:hover.make-recipe {
+  background: #ffffff;
+}
 /*--------------General & IDs--------------*/
 
 
