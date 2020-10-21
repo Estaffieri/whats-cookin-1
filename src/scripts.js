@@ -24,10 +24,15 @@ let pantry;
 
 window.addEventListener('load', loadApp);
 homeView.addEventListener('click', function() {
-  goToRecipeResults(event.target.innerText.toLowerCase());
+  goToRecipeResults(event.target.closest('article').children[2].innerText.toLowerCase());
 });
 searchButton.addEventListener('click', function() {
   goToRecipeResults(searchBar.value);
+});
+searchBar.addEventListener('keypress', function() {
+  if (event.which === 13) {
+    goToRecipeResults(searchBar.value);
+  }
 });
 homeButton.addEventListener('click', goToHome);
 favoritesButton.addEventListener('click', goToFavorites);
@@ -280,6 +285,7 @@ function getRecipesByIngredient(input) {
 }
 
 function getRecipes(input) {
+
   let recipes = '';
   if (getRecipesByCategory(input).length) {
     recipes = getRecipesByCategory(input);
