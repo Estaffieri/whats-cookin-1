@@ -43,7 +43,7 @@ class User {
     return (!this.shoppingList.length) ? true : false;
   }
   returnShoppingList() {
-      return this.shoppingList
+    return this.shoppingList
   }
 }
 

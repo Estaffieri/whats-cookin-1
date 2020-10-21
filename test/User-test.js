@@ -7,7 +7,9 @@ const userDummyData = require("./dummy-data/testUsers");
 const testRecipes = require("./dummy-data/testRecipes");
 
 describe("User", function() {
-  let id, name, pantry, favoriteRecipes, ingredientList;
+  let pantry;
+  let user;
+
   beforeEach(function() {
     pantry = new Pantry(userDummyData[0].pantry);
     user = new User(userDummyData[0].id, userDummyData[0].name, pantry)
@@ -193,7 +195,7 @@ describe("User", function() {
           "unit": "c"
         }
       }],
-      "instructions": [{"instruction":"Cook", "number": 1}],
+      "instructions": [{"instruction": "Cook", "number": 1}],
       "name": "test",
       "tags": ["lunch"]
     });

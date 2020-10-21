@@ -144,7 +144,7 @@ function displayFavorites() {
       favoriteView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">
       <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
     });
-  };
+  }
 }
 
 function goToFavorites() {
@@ -248,7 +248,7 @@ function searchIngredient(ingredientIds) {
   return matches;
 }
 
-function searchFavoritesForIngredient(ingredientIds){
+function searchFavoritesForIngredient(ingredientIds) {
   let matches = [];
   user.favoriteRecipes.forEach(recipe => {
     recipe.ingredients.forEach(ingredient => {
@@ -270,13 +270,13 @@ function getRecipesByIngredient(input) {
     }
   });
   if (!favoriteView.classList.contains('hidden')) {
-      let matches = searchFavoritesForIngredient(ingredientIds);
-      console.log(matches);
-      return matches;
-    } else {
-      let matches = searchIngredient(ingredientIds);
-      return matches;
-    }
+    let matches = searchFavoritesForIngredient(ingredientIds);
+    console.log(matches);
+    return matches;
+  } else {
+    let matches = searchIngredient(ingredientIds);
+    return matches;
+  }
 }
 
 function getRecipes(input) {
@@ -285,7 +285,7 @@ function getRecipes(input) {
     recipes = getRecipesByCategory(input);
   } else if (getRecipesByIngredient(input).length) {
     recipes = getRecipesByIngredient(input);
-  };
+  }
   return recipes;
 }
 
@@ -318,7 +318,7 @@ function saySorry(searchInput) {
   if (!favoriteView.classList.contains('hidden')) {
     sectionHeading.innerText = `Sorry!  We did not find ${searchInput} in your favorite recipes.  Please try again.`;
   } else {
-  sectionHeading.innerText = `Sorry!  We did not find ${searchInput} in our recipes.  Please try again.`;
+    sectionHeading.innerText = `Sorry!  We did not find ${searchInput} in our recipes.  Please try again.`;
   }
 }
 
