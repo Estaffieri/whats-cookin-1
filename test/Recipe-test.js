@@ -98,10 +98,10 @@ describe('Recipe', function() {
   });
 
   it('should return the cooking instructions', () => {
-    expect(recipe.getInstructions()).to.deep.equal([{1: "Mix together"}, {2: "Cook until hot"}]);
+    expect(recipe.getInstructions()).to.deep.equal([{stepNumber: 1, step: "Mix together"}, {stepNumber: 2, step: "Cook until hot"}]);
   });
 
   it('should add up the cost of all ingredients in the recipe', () => {
-    expect(recipe.getCostOfIngredients(recipe.ingredients, allIngredients)).to.equal(6.75);
+    expect(recipe.getCostOfIngredients(recipe.ingredients, allIngredients)).to.equal('6.75');
   });
 });

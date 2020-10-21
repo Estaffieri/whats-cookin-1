@@ -20,8 +20,8 @@ class Recipe {
   getIngredientList(needs) {
     let ingredientList = [];
     needs.forEach(ingredient => {
-       ingredientsData.forEach(item => {
-        if(ingredient.id === item.id) {
+      ingredientsData.forEach(item => {
+        if (ingredient.id === item.id) {
           ingredientList.push(`${item.name} (${ingredient.quantity.amount} ${ingredient.quantity.unit})`)
         }
       });
