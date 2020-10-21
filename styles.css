@@ -43,9 +43,15 @@ h1, h2 {
   margin-bottom: 0em;
 }
 
-h3 {
+h3, h4 {
   color: #E63946;
-  font-style: bold italic;
+
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+
 }
 
 /*--------------NAV BAR--------------*/
@@ -110,15 +116,6 @@ h3 {
   margin-bottom: 0em;
 }
 
-/* .recipe-view-button {
-  margin: 1em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #A8DADC;
-} */
-
 .recipes-heading {
   margin-left: 1.37em;
   color: #ffffff;
@@ -166,11 +163,6 @@ h3 {
 }
 /*--------------RECIPE VIEW--------------*/
 
-.recipe-name {
-  padding-left: 1em;
-  margin-bottom: 0em;
-}
-
 .recipe-view {
   display: grid;
   grid-gap: 0.25em;
@@ -189,25 +181,56 @@ h3 {
 }
 
 .single-recipe-picture {
-  position: relative;
+border: 5px solid #1D3557;
+ width:100%;
 }
 
 .recipe-image {
- width: 100%;
+  width: 100%;
+  grid-column: 1 / span 3;
 }
 
 .directions-section {
+  text-align: center;
+  grid-column: 2 / span 2 ;
+  grid-row: 2 ;
+}
 
+.directions-list {
+  margin: 0em;
+  text-align: left;
 }
 
 .needed-items-section {
+  border: 2px solid #1D3557;
+  text-align: center;
+  grid-column: 4 / span 1;
+  grid-row: 1 / span 2;
+  background: #ffffff;
+}
 
+.needed-items-list {
+  margin: 1em;
+  text-align: left;
 }
 
 .ingredient-section {
-
+  text-align: center;
+  grid-column: 1 ;
+  grid-row: 2 ; 
 }
-/*--------------General--------------*/
+
+.ingredient-list {
+  text-align: left;
+  margin: 0.5em;
+}
+
+.shopping-list-price {
+  color: #000000;
+  background: #A8DADC;
+}
+
+/*--------------General & IDs--------------*/
 
 
 #logo {
