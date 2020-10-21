@@ -31,6 +31,7 @@ nav {
 main {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 button {
@@ -47,12 +48,7 @@ h3 {
   font-style: bold italic;
 }
 
-
-.recipe-name {
-  padding-left: 1em;
-  margin-bottom: 0em;
-}
-
+/*--------------NAV BAR--------------*/
 .home-view-button {
   margin: 1em;
   display: flex;
@@ -63,15 +59,6 @@ h3 {
 }
 
 .favorites-view-button {
-  margin: 1em;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #A8DADC;
-}
-
-.recipe-view-button {
   margin: 1em;
   display: flex;
   flex-direction: column;
@@ -108,19 +95,39 @@ h3 {
   border-bottom-right-radius: 0.15em;
   border-top-right-radius: 0.15em;
 }
+/*--------------HOME VIEW--------------*/
+.home-view {
+  padding: 1em 1em 1em 1em;
+  display: grid;
+  grid-template-columns: 49% 49%;
+  grid-gap: 2%;
+  background-color: #457B9D;
+  width: 95%;
+  overflow: hidden;
+}
+.recipe-name {
+  padding-left: 1em;
+  margin-bottom: 0em;
+}
+
+.recipe-view-button {
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #A8DADC;
+}
 
 .recipes-heading {
+  margin-left: 1.5em;
   color: #ffffff;
   background: #457B9D;
   margin-bottom: 0em;
   padding: 0.75em;
   border-top-right-radius: 15em;
   width: 45%;
-}
-
-.recipe-image {
-  width: 10rem;
-  height: 15rem;
+  align-self: flex-start;
 }
 
 .default {
@@ -148,28 +155,43 @@ h3 {
   opacity: 45%;
   width: 100%
 }
+/*--------------RECIPE VIEW--------------*/
+
+.recipe-name {
+  padding-left: 1em;
+  margin-bottom: 0em;
+}
+
+.recipe-view {
+  display: flex;
+  flex-direction: column;
+  background: #A8DADC;
+  width: 95%;
+}
 
 .single-category-view {
   padding: 1em 1em 1em 1em;
   display: grid;
   grid-template-columns: 49% 49%;
   grid-gap: 2%;
+  width: 95%;
   background-color: #457B9D;
-}
-
-.home-view {
-  padding: 1em 1em 1em 1em;
-  display: grid;
-  grid-template-columns: 49% 49%;
-  grid-gap: 2%;
-  background-color: #457B9D;
-  overflow: hidden;
 }
 
 .container {
   border: 2px solid #1D3557;
   background: #ffffff;
 }
+
+.single-recipe-picture {
+  width: 100%;
+}
+
+.recipe-image {
+ width: 100%;
+}
+/*--------------VIEW--------------*/
+
 
 #logo {
   width: 4em;
