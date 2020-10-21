@@ -7,7 +7,7 @@
     <title>Whats Cookin</title>
   </head>
   <body>
-    <nav> 
+    <nav>
         <button class="home-view-button" type="button" name="Home">
           <img id="logo" src="./assets/icons/003-cooking-pots.svg"/>
           <h1>What's Cookin'</h1>
@@ -19,8 +19,8 @@
       <div class="search-wrapper">
         <section class="greeting"><h2>Welcome user!</h2></section>
         <section class="search-section">
-          <input class="search-input" type="text" name="search-field" placeholder="What would you like to cook?">
-          <button class="search-button" type="button" name="search" tabindex="0">
+          <input class="search-input" type="text" name="search-field" placeholder="Search all recipes by type or ingredient">
+          <button class="search-button" type="button" name="search">
             <img id="magnifying-glass" src="./assets/icons/002-magnifying-glass.svg"/>
           </button>
         </section>
@@ -41,9 +41,10 @@
         </div>
       </section>
       <section class="recipe-view hidden">
+        <button type="button" class="make-recipe" name="make-recipe">Cook This Recipe</button>
         <article class="recipe-image">
         </article>
-        <section class="needed-items-section">
+        <section class="needed-items-section hidden">
           <h4>Items you need that are not currently in your pantry:</h4>
           <p class="shopping-list-price"></p>
           <article class="needed-items-list">
