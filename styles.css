@@ -105,6 +105,10 @@ p {
   border-bottom-right-radius: 0.15em;
   border-top-right-radius: 0.15em;
 }
+
+:hover.search-button {
+  background: #ffffff;
+}
 /*--------------HOME VIEW--------------*/
 .home-view {
   padding: 1em 1em 1em 1em;
@@ -242,11 +246,11 @@ border: 5px solid #1D3557;
 .make-recipe {
   padding: 1em;
     position: absolute;
-    transform: translate(38em, 1em);
+    transform: translate(44em, 1em);
     z-index: 1;
     font-weight: bold;
     height: 3em;
-    background: #E63946;
+    background: #ffffff;
     border-top-left-radius: 1em;
     border-top-right-radius: 1em;
     border-bottom-left-radius: 1em;
@@ -254,8 +258,49 @@ border: 5px solid #1D3557;
 }
 
 :hover.make-recipe {
-  background: #ffffff;
+  background: #E63946;
 }
+/*--------------FAVORITES VIEW--------------*/
+.favorite-view {
+  padding: 1em 1em 1em 1em;
+  display: grid;
+  grid-template-columns: 49% 49%;
+  grid-gap: 2%;
+  background-color: #457B9D;
+  width: 95%;
+  overflow: hidden;
+}
+.recipe-name {
+  margin-bottom: 0em;
+}
+
+.default {
+  width: 10rem;
+  height: 15rem;
+}
+
+.category {
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.category-recipe  {
+  position: relative;
+  text-align: center;
+  background-color: #ffffff;
+  width: 100%;
+}
+
+.recipe-picture {
+  width: 100%;
+}
+
+.placeholder-image {
+  position:relative;
+  opacity: 45%;
+  width: 100%
+}
+
 /*--------------General & IDs--------------*/
 
 
