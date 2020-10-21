@@ -236,42 +236,47 @@ function getRecipesByCategory(category) {
   }
 }
 
-function searchIngredient(ingredientId) {
+function searchIngredient(ingredientIds) {
   let matches = [];
   recipeData.forEach(recipe => {
     recipe.ingredients.forEach(ingredient => {
-      if (ingredient.id === ingredientId) {
-        matches.push(recipe);
-      }
+      ingredientIds.forEach(id => {
+        if (ingredient.id === id && !matches.includes(recipe)) {
+          matches.push(recipe);
+        }
+      });
     });
   });
   return matches;
 }
 
-function searchFavoritesForIngredient(ingredientId){
+function searchFavoritesForIngredient(ingredientIds){
   let matches = [];
   user.favoriteRecipes.forEach(recipe => {
     recipe.ingredients.forEach(ingredient => {
-      if (ingredient.id === ingredientId) {
-        matches.push(recipe);
-      }
+      ingredientIds.forEach(id => {
+        if (ingredient.id === id && !matches.includes(recipe)) {
+          matches.push(recipe);
+        }
+      });
     });
   });
   return matches;
 }
 
 function getRecipesByIngredient(input) {
-  let ingredientId = '';
+  let ingredientIds = [];
   ingredientsData.forEach(ingredient => {
-    if (ingredient.name === input.toLowerCase()) {
-      ingredientId = ingredient.id;
+    if (ingredient.name && ingredient.name.includes(input.toLowerCase())) {
+      ingredientIds.push(ingredient.id);
     }
   });
   if (!favoriteView.classList.contains('hidden')) {
-      let matches = searchFavoritesForIngredient(ingredientId);
+      let matches = searchFavoritesForIngredient(ingredientIds);
+      console.log(matches);
       return matches;
     } else {
-      let matches = searchIngredient(ingredientId);
+      let matches = searchIngredient(ingredientIds);
       return matches;
     }
 }
@@ -331,7 +336,6 @@ function showNeededItemsSection(event) {
   let recipeName = event.target.closest('main').children[0].innerHTML;
   let recipeToCook = recipeData.find(recipe => recipe.name = recipeName);
   user.addRecipeToCook(recipeToCook);
-  console.log(user.recipesToCook);
 }
 
 function displayShoppingList(recipe) {
