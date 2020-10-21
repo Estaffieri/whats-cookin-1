@@ -108,13 +108,11 @@ function showSelectRecipe(targetName) {
 
 function checkUserFavorites(recipe) {
   if (user.favoriteRecipes.length) {
-    user.favoriteRecipes.forEach(favorite => {
-      if (favorite.id === recipe.id) {
-        recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
-      } else {
-        recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
-      }
+    let favRecipe = user.favoriteRecipes.find(favorite => {
+      return favorite.id === recipe.id;
     });
+    console.log(favRecipe)
+    recipeImage.innerHTML = `<img class="single-recipe-picture" src="${favRecipe.image}" alt="photo of ${favRecipe.image}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
   }  else {
     recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
   }
