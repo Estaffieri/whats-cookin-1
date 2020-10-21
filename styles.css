@@ -193,6 +193,7 @@ border: 5px solid #1D3557;
   position: relative;
   width: 100%;
   grid-column: 1 / span 3;
+  grid-row: 1;
 }
 
 .directions-section {
@@ -233,8 +234,10 @@ border: 5px solid #1D3557;
 .shopping-list-price {
   color: #000000;
   background: #A8DADC;
+  padding: 1em;
+  font-style: oblique;
+  font-weight: bold;
 }
-
 /*--------------General & IDs--------------*/
 
 
@@ -270,6 +273,12 @@ border: 5px solid #1D3557;
   width: 21%;
   z-index: 1;
   transform: translate(67%, 31%);
+}
+
+#bold {
+  font-style: oblique;
+  font-size: xx-large;
+  margin: 0.5em;
 }
 
 .hidden {
