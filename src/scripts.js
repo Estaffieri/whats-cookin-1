@@ -141,7 +141,7 @@ function displayFavorites() {
   if (user.favoriteRecipes) {
     favoriteView.innerHTML = '';
     user.favoriteRecipes.forEach(recipe => {
-      favoriteView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">
+      favoriteView.innerHTML += `<div class="recipe-container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">
       <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
     });
   };
@@ -175,7 +175,7 @@ function generateCategories() {
 function displayCat(items) {
   homeView.innerHTML = '';
   items.forEach(item => {
-    homeView.innerHTML += `<div class="container"><article class="category"><img id="glove" src="assets/icons/gloves.svg"/><img class="placeholder-image" src="assets/spices-556x370.jpg" alt="placeholder image"/><h3>${item}</h3>
+    homeView.innerHTML += `<div class="recipe-container"><article class="category"><img id="glove" src="assets/icons/gloves.svg"/><img class="placeholder-image" src="assets/spices-556x370.jpg" alt="placeholder image"/><h3>${item}</h3>
     </article></div>`;
   });
 }
@@ -300,10 +300,10 @@ function displayResults(results, searchInput) {
     singleCategoryView.innerHTML = '';
     results.forEach(recipe => {
       if (user.favoriteRecipes.includes(recipe)) {
-        singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">
+        singleCategoryView.innerHTML += `<div class="recipe-container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">
         <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
       } else {
-        singleCategoryView.innerHTML += `<div class="container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
+        singleCategoryView.innerHTML += `<div class="recipe-container"><article class="category-recipe"><img class="recipe-picture" src="${recipe.image}" alt="photo of ${recipe.name}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">
         <h4 class="recipe-name">${recipe.name}<h4></article></div>`;
       }
     });
