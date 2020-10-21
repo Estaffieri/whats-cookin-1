@@ -11,11 +11,11 @@ const favoriteView = document.querySelector(".favorite-view");
 const singleCategoryView = document.querySelector(".single-category-view");
 const recipeView = document.querySelector(".recipe-view");
 
-const checkPantryButton = document.querySelector("#pantry-button");
-const getShoppingList = document.querySelector("#shopping-list-button");
+const cookRecipeButton = document.querySelector(".make-recipe");
 const recipeImage = document.querySelector(".recipe-image");
 const ingredientList = document.querySelector(".ingredient-list");
 const directionsList = document.querySelector(".directions-list");
+const neededItemsSection = document.querySelector(".needed-items-section");
 const shoppingListPrice = document.querySelector(".shopping-list-price");
 const neededItemsList = document.querySelector(".needed-items-list");
 
@@ -39,6 +39,9 @@ favoriteView.addEventListener('click', function() {
 });
 recipeView.addEventListener('click', function() {
   handleClickInRecipeView(event);
+});
+cookRecipeButton.addEventListener('click', function() {
+  showNeededItemsSection(event);
 });
 
 function handleRecipeClick(event) {
@@ -99,18 +102,17 @@ function showSelectRecipe(targetName) {
   displayDirections(recipe);
   displayShoppingList(recipe);
   changeView(recipeView, singleCategoryView, favoriteView, homeView);
+  neededItemsSection.classList.add('hidden');
   document.documentElement.scrollTop = 0;
 }
 
 function checkUserFavorites(recipe) {
   if (user.favoriteRecipes.length) {
-    user.favoriteRecipes.forEach(favorite => {
-      if (favorite.id === recipe.id) {
-        recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
-      } else {
-        recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
-      }
+    let favRecipe = user.favoriteRecipes.find(favorite => {
+      return favorite.id === recipe.id;
     });
+    console.log(favRecipe)
+    recipeImage.innerHTML = `<img class="single-recipe-picture" src="${favRecipe.image}" alt="photo of ${favRecipe.image}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
   }  else {
     recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
   }
@@ -121,6 +123,12 @@ function changeView(show, hide1, hide2, hide3) {
   hide1.classList.add('hidden');
   hide2.classList.add('hidden');
   hide3.classList.add('hidden');
+  searchBar.value = '';
+  if (!favoriteView.classList.contains('hidden')) {
+    searchBar.placeholder = 'Search MY FAVORITE recipes by type or ingredient';
+  } else {
+    searchBar.placeholder = 'Search all recipes by type or ingredient';
+  }
 }
 
 function goToHome() {
@@ -198,32 +206,77 @@ function loadApp() {
   document.documentElement.scrollTop = 0;
 }
 
-function getRecipesByCategory(category) {
+function searchCategory(category) {
   let matches = [];
   recipeData.forEach(recipe => {
-    if (recipe.tags.includes(category)) {
+    if (recipe.tags.includes(category.toLowerCase())) {
       matches.push(recipe);
     }
   });
   return matches;
 }
 
-function getRecipesByIngredient(input) {
+function searchFavoritesForCategory(category) {
   let matches = [];
-  let ingredientId = '';
-  ingredientsData.forEach(ingredient => {
-    if (ingredient.name === input.toLowerCase()) {
-      ingredientId = ingredient.id;
+  user.favoriteRecipes.forEach(recipe => {
+    if (recipe.tags.includes(category.toLowerCase())) {
+      matches.push(recipe);
     }
   });
+  return matches;
+}
+
+function getRecipesByCategory(category) {
+  if (!favoriteView.classList.contains('hidden')) {
+    return searchFavoritesForCategory(category);
+  } else {
+    return searchCategory(category);
+  }
+}
+
+function searchIngredient(ingredientIds) {
+  let matches = [];
   recipeData.forEach(recipe => {
     recipe.ingredients.forEach(ingredient => {
-      if (ingredient.id === ingredientId) {
-        matches.push(recipe);
-      }
+      ingredientIds.forEach(id => {
+        if (ingredient.id === id && !matches.includes(recipe)) {
+          matches.push(recipe);
+        }
+      });
     });
   });
   return matches;
+}
+
+function searchFavoritesForIngredient(ingredientIds){
+  let matches = [];
+  user.favoriteRecipes.forEach(recipe => {
+    recipe.ingredients.forEach(ingredient => {
+      ingredientIds.forEach(id => {
+        if (ingredient.id === id && !matches.includes(recipe)) {
+          matches.push(recipe);
+        }
+      });
+    });
+  });
+  return matches;
+}
+
+function getRecipesByIngredient(input) {
+  let ingredientIds = [];
+  ingredientsData.forEach(ingredient => {
+    if (ingredient.name && ingredient.name.includes(input.toLowerCase())) {
+      ingredientIds.push(ingredient.id);
+    }
+  });
+  if (!favoriteView.classList.contains('hidden')) {
+      let matches = searchFavoritesForIngredient(ingredientIds);
+      console.log(matches);
+      return matches;
+    } else {
+      let matches = searchIngredient(ingredientIds);
+      return matches;
+    }
 }
 
 function getRecipes(input) {
@@ -256,8 +309,16 @@ function displayResults(results, searchInput) {
     });
     sectionHeading.innerText = searchInput.charAt(0).toUpperCase() + searchInput.slice(1);
   } else {
-    singleCategoryView.innerHTML = '';
-    sectionHeading.innerText = `Sorry!  We did not find ${searchInput} in our recipes.  Please try again.`;
+    saySorry(searchInput);
+  }
+}
+
+function saySorry(searchInput) {
+  singleCategoryView.innerHTML = '';
+  if (!favoriteView.classList.contains('hidden')) {
+    sectionHeading.innerText = `Sorry!  We did not find ${searchInput} in your favorite recipes.  Please try again.`;
+  } else {
+  sectionHeading.innerText = `Sorry!  We did not find ${searchInput} in our recipes.  Please try again.`;
   }
 }
 
@@ -266,6 +327,13 @@ function goToRecipeResults(input) {
   displayResults(recipes, input);
   changeView(singleCategoryView, homeView, recipeView, favoriteView);
   document.documentElement.scrollTop = 0;
+}
+
+function showNeededItemsSection(event) {
+  neededItemsSection.classList.remove('hidden');
+  let recipeName = event.target.closest('main').children[0].innerHTML;
+  let recipeToCook = recipeData.find(recipe => recipe.name = recipeName);
+  user.addRecipeToCook(recipeToCook);
 }
 
 function displayShoppingList(recipe) {
@@ -277,6 +345,7 @@ function displayShoppingList(recipe) {
   neededItems.forEach(item => {
     neededItemsList.innerHTML += `<p class="needed-item">${item}</p><br>`
   });
+  neededItemsSection.classList.remove('hidden');
 }
 
 function displayDirections(recipe) {
