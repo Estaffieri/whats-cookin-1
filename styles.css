@@ -39,6 +39,7 @@ button {
 }
 
 h1, h2 {
+  font-size: x-large;
   margin-top: 0em;
   margin-bottom: 0em;
 }
@@ -68,6 +69,10 @@ p {
   background: #A8DADC;
 }
 
+:hover.home-view-button {
+  background: #ffffff;
+}
+
 .favorites-view-button {
   margin: 1em;
   display: flex;
@@ -75,6 +80,9 @@ p {
   justify-content: center;
   align-items: center;
   background: #A8DADC;
+}
+:hover.favorites-view-button {
+  background: #ffffff;
 }
 
 .search-wrapper {
@@ -105,6 +113,10 @@ p {
   border-bottom-right-radius: 0.15em;
   border-top-right-radius: 0.15em;
 }
+
+:hover.search-button {
+  background: #ffffff;
+}
 /*--------------HOME VIEW--------------*/
 .home-view {
   padding: 1em 1em 1em 1em;
@@ -120,7 +132,7 @@ p {
 }
 
 .recipes-heading {
-  margin-left: 1.37em;
+  margin-left: 1.85em;
   color: #ffffff;
   background: #457B9D;
   margin-bottom: 0em;
@@ -156,6 +168,8 @@ p {
   opacity: 45%;
   width: 100%
 }
+
+
 /*--------------SINGLE CAT VIEW--------------*/
 .single-category-view {
   padding: 1em 1em 1em 1em;
@@ -193,6 +207,7 @@ border: 5px solid #1D3557;
   position: relative;
   width: 100%;
   grid-column: 1 / span 3;
+  grid-row: 1;
 }
 
 .directions-section {
@@ -233,6 +248,67 @@ border: 5px solid #1D3557;
 .shopping-list-price {
   color: #000000;
   background: #A8DADC;
+  padding: 1em;
+  font-style: oblique;
+  font-weight: bold;
+}
+
+.make-recipe {
+  padding: 1em;
+    position: absolute;
+    transform: translate(44em, 1em);
+    z-index: 1;
+    font-weight: bold;
+    height: 3em;
+    background: #ffffff;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+}
+
+:hover.make-recipe {
+  background: #E63946;
+}
+/*--------------FAVORITES VIEW--------------*/
+.favorite-view {
+  padding: 1em 1em 1em 1em;
+  display: grid;
+  grid-template-columns: 49% 49%;
+  grid-gap: 2%;
+  background-color: #457B9D;
+  width: 95%;
+  overflow: hidden;
+}
+.recipe-name {
+  margin-bottom: 0em;
+}
+
+.default {
+  width: 10rem;
+  height: 15rem;
+}
+
+.category {
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.category-recipe  {
+  position: relative;
+  text-align: center;
+  background-color: #ffffff;
+  width: 100%;
+}
+
+.recipe-picture {
+  width: 100%;
+}
+
+.placeholder-image {
+  position:relative;
+  opacity: 45%;
+  width: 100%
 }
 
 /*--------------General & IDs--------------*/
@@ -270,6 +346,12 @@ border: 5px solid #1D3557;
   width: 21%;
   z-index: 1;
   transform: translate(67%, 31%);
+}
+
+#bold {
+  font-style: oblique;
+  font-size: xx-large;
+  margin: 0.5em;
 }
 
 .hidden {
