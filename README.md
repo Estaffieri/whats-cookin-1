@@ -11,6 +11,9 @@ The details of this project are outlined in the <a href="https://frontend.turing
 
 [Estelle Staffieri](https://github.com/Estaffieri)
 
+## Deployed Site
+[What's-Cookin'](https://bruce-gordon.github.io/whats-cookin/)
+
 ## Set Up 
 In your terminal run:
 ```open index.html```
