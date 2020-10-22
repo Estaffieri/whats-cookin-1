@@ -40,10 +40,6 @@ Our user class has a property to store recipesToCook and a method to add recipes
   <img width="460" height="300" src="" alt="">
 </p><br>
 
-<p align="center">A recipe view</br>
-  <img width="460" height="300" src="" alt="">
-</p><br>
-
 <p align="center">Adding and removing from favorites</br>
-  <img width="460" height="300" src="" alt="">
+  <img width="460" height="300" src="https://media.giphy.com/media/THAsxYiyJAk2e2bCly/giphy.gif" alt="short video showing favorites being added and removed">
 </p><br>
