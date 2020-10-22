@@ -116,7 +116,6 @@ function checkUserFavorites(recipe) {
     let favRecipe = user.favoriteRecipes.find(favorite => {
       return favorite.id === recipe.id;
     });
-    console.log(favRecipe)
     recipeImage.innerHTML = `<img class="single-recipe-picture" src="${favRecipe.image}" alt="photo of ${favRecipe.image}"><img class="bookmark checked" id="favorite" src="assets/icons/bookmark.svg" alt="bookmark-icon">`;
   }  else {
     recipeImage.innerHTML = `<img class="single-recipe-picture" src="${recipe.image}" alt="photo of ${recipe.image}"><img class="bookmark unchecked" id="favorite" src="assets/icons/001-bookmark.svg" alt="bookmark-icon">`;
@@ -276,7 +275,6 @@ function getRecipesByIngredient(input) {
   });
   if (!favoriteView.classList.contains('hidden')) {
     let matches = searchFavoritesForIngredient(ingredientIds);
-    console.log(matches);
     return matches;
   } else {
     let matches = searchIngredient(ingredientIds);
@@ -338,7 +336,7 @@ function goToRecipeResults(input) {
 function showNeededItemsSection(event) {
   neededItemsSection.classList.remove('hidden');
   let recipeName = event.target.closest('main').children[0].innerHTML;
-  let recipeToCook = recipeData.find(recipe => recipe.name = recipeName);
+  let recipeToCook = recipeData.find(recipe => recipe.name === recipeName);
   user.addRecipeToCook(recipeToCook);
 }
 
