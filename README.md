@@ -33,13 +33,13 @@ Our user class has a property to store recipesToCook and a method to add recipes
 
 ## Functionality Showcase
 <p align="center">The home page for What's Cookin'</br>
-  <img width="460" height="300" src="" alt="">
+  <img width="560" height="400" src="assets/Home.png" alt="View of the homepage">
 </p><br>
 
 <p align="center">The category view</br>
-  <img width="460" height="300" src="" alt="">
+  <img width="560" height="400" src="assets/Antipasti.png" alt="view of the antipasti recipies page">
 </p><br>
 
 <p align="center">Adding and removing from favorites</br>
-  <img width="460" height="300" src="https://media.giphy.com/media/THAsxYiyJAk2e2bCly/giphy.gif" alt="short video showing favorites being added and removed">
+  <img width="560" height="400" src="https://media.giphy.com/media/THAsxYiyJAk2e2bCly/giphy.gif" alt="short video showing favorites being added and removed">
 </p><br>
