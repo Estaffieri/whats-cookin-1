@@ -310,6 +310,11 @@ border: 5px solid #1D3557;
   opacity: 45%;
   width: 100%
 }
+.blank-favorites {
+  background: #ffffff;
+  width: 95%;
+  height: 3em;
+}
 
 /*--------------General & IDs--------------*/
 
@@ -352,6 +357,10 @@ border: 5px solid #1D3557;
   font-style: oblique;
   font-size: xx-large;
   margin: 0.5em;
+}
+
+#blank {
+  width: 1em;
 }
 
 .hidden {
